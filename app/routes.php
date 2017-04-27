@@ -105,18 +105,21 @@ Route::get('sales/{id}/list_price', array('before' => 'auth', 'uses' =>'SalesCon
 Route::get('sales/{id}/product_lots', array('before' => 'auth', 'uses' =>'SalesController@product_lots'));
 //Route::get('sales/{id}/reports_products', array('before' => 'auth', 'uses' =>'SalesController@reports_products'));
 
-Route::get('sales/{id}/service_list', array('before' => 'auth|view_service', 'uses' =>'SalesController@service_list'));
-Route::get('sales/{id}/spare_part', array('before' => 'auth|view_service', 'uses' =>'SalesController@spare_part'));
 Route::get('sales/{id}/technician_allowance', array('before' => 'auth|view_service', 'uses' =>'SalesController@technician_allowance'));
-Route::get('sales/{id}/new_service_list', array('before' => 'auth|add_service', 'uses' =>'SalesController@new_service_list'));
-Route::get('sales/{id}/add_spare_part_view', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_spare_part_view'));
+/*Route::get('sales/{id}/new_service_list', array('before' => 'auth|add_service', 'uses' =>'SalesController@new_service_list'));*/
+Route::get('sales/{id}/update_technician_view/{technician_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_technician_view'));
+Route::post('sales/{id}/update_technician/{technician_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_technician'));
 Route::get('sales/{id}/add_technician_allowance_view', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_technician_allowance_view'));
+Route::get('sales/{id}/delete_technician/{technician_id}', array('before' => 'auth|delete_service', 'uses' =>'SalesController@delete_technician'));
+Route::post('sales/{id}/add_technician', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_technician'));
+
+Route::get('sales/{id}/service_list', array('before' => 'auth|view_service', 'uses' =>'SalesController@service_list'));
 Route::get('sales/{id}/add_service', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_service'));
 Route::get('sales/{id}/view_service_list/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@view_service_list'));
 Route::get('sales/{id}/update_service/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_service'));
+Route::post('sales/{id}/update_service_report/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_service_report'));
 Route::post('sales/{id}/add_service_list', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_service_list'));
 Route::post('sales/{id}/add_service_report', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_service_report'));
-Route::post('sales/{id}/add_sparepart', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_sparepart'));
 Route::get('sales/{id}/delete_service_list/{service_id}', array('before' => 'auth|delete_service', 'uses' =>'SalesController@delete_service_list'));
 
 // Route::get('sales/{id}/service_list_price', array('before' => 'auth', 'uses' =>'SalesController@service_list_price'));

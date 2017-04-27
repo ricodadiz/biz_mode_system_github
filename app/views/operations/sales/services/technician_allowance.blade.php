@@ -18,7 +18,7 @@
                         <div class="col-sm-6 col-md-5">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
+                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$technician_count}}"></div>
                                 </div>
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Technician Allowance</div>
                             </a>
@@ -47,14 +47,14 @@
                             <h3 class="block-title">All Technician Allowance</h3>
                         </div>
                         <div class="block-content">
-                        @if(isset(Session::get('delete_service_list_success')["message"]))
+                        @if(isset(Session::get('delete_technician_success')["message"]))
                                     <div class="alert alert-success">
-                                        {{Session::get('delete_service_list_success')["message"]}}
+                                        {{Session::get('delete_technician_success')["message"]}}
                                     </div>
                                 @endif
-                                @if(Session::get('delete_service_list_error'))
+                                @if(Session::get('delete_technician_error'))
                                     <div class="alert alert-error alert-danger">
-                                    @foreach(Session::get('delete_service_list_error')->all() as $m)
+                                    @foreach(Session::get('delete_technician_error')->all() as $m)
                                         {{$m}}<br>    
                                     @endforeach
                                     </div>
@@ -62,30 +62,24 @@
                             <table class="table table-bordered table-striped js-dataTable-full">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" style="width: 150px;">Ref. No.</th>
-                                        <th class="visible-lg">Station/Location</th>
-                                        <th class="hidden-xs text-center">Service Date</th>
+                                        <th class="text-center" style="width: 150px;">date</th>
+                                        <th class="visible-lg">name of technician</th>
+                                        <th class="hidden-xs text-center">Particulars</th>
                                         <th class="hidden-xs text-center">Total</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
+                                    @foreach($technician as $t)
                                     <tr>
-                                        <td class="text-center">
-                                                <strong></strong>
-                                            </a>
-                                        </td>
-                                        <td class="visible-lg">
-                                         
-                                        </td>
-                                        <td class="hidden-xs text-center"></td>
-                                        <td class="hidden-xs text-center"></td>
+                                        <td class="text-center"><strong>{{$t->date}}</strong></a></td>
+                                        <td class="visible-lg">{{$t->name}}</td>
+                                        <td class="hidden-xs text-center">{{$t->particular}}</td>
+                                        <td class="hidden-xs text-center">{{$t->total}}</td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
-                                                {{-- <a href="base_pages_ecom_product_edit.html" data-toggle="tooltip" title="View" class="btn btn-default"><i class="fa fa-eye"></i></a> --}}
-                                               
-                                                <a href="" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
+
+                                                <a href="{{URL::to('sales/'.$company->id.'/update_technician_view/'.$t->id)}}" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
                                                
                                                 <a data-toggle="modal" data-target="#modal-popout-" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>
                                                
@@ -109,7 +103,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="">
+                                                    <a href="{{URL::to('sales/{id}/delete_technician/'.$t->id)}}">
                                                     <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-check"></i> Ok</button>
                                                     </a>
                                                     <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
@@ -117,7 +111,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                 
+                                 @endforeach
                                 </tbody>
                                 <thead>
                                         <tr class="info">

@@ -499,29 +499,19 @@
                                             <ul>
                                                 @if($user->can('view_service'))
                                                 <li>
-                                                    <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">Service List</a>
-                                                </li>
-                                                @endif
-                                                @if($user->can('view_service'))
-                                                <li>
-                                                    <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">Service Report</a>
-                                                </li>
-                                                @endif
-                                                @if($user->can('view_service'))
-                                                <li>
-                                                    <a class="nav-submenu" data-toggle="nav-submenu" href="{{URL::to('sales/'.$company->id.'/service_list')}}">Service Expenses</a>
+                                                    <a class="nav-submenu" data-toggle="nav-submenu" href="{{URL::to('sales/'.$company->id.'/service_list')}}">Services</a>
                                                    <ul>
                                                     @endif
+                                                        @if($user->can('view_service'))
                                                         <li>
-                                                            @if($user->can('view_service'))
-                                                            <a href="{{URL::to('sales/'.$company->id.'/spare_part')}}">Spare Parts</a>
-                                                            @endif
+                                                            <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">Spare Parts</a>
                                                         </li>
-                                                         <li>
-                                                            @if($user->can('view_service'))
+                                                        @endif
+                                                        @if($user->can('view_service'))
+                                                        <li>
                                                             <a href="{{URL::to('sales/'.$company->id.'/technician_allowance')}}">Technician Allowance</a>
-                                                            @endif
                                                         </li>
+                                                        @endif
                                                     </ul> 
                                                 </li>
                                                 @if($user->can('view_delivery'))

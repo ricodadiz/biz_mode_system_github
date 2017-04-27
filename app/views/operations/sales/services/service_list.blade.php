@@ -89,17 +89,16 @@
                                 @foreach($services as $s)
                                     <tr>
                                         <td class="text-center">
-                                                <strong>{{$s->contact_person}}</strong>
+                                                <strong>{{$s->sr_no}}</strong>
                                             </a>
                                         </td>
                                         <td class="visible-lg">
                                         {{$s->station_location}} 
                                         </td>
                                         <td class="hidden-xs text-center">{{$s->service_date}}</td>
-                                        <td class="hidden-xs text-center">{{$s->service_total}}</td>
+                                        <td class="hidden-xs text-center">{{$s->total}}</td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
-                                                {{-- <a href="base_pages_ecom_product_edit.html" data-toggle="tooltip" title="View" class="btn btn-default"><i class="fa fa-eye"></i></a> --}}
                                                 @if($user->can('view_service'))
                                                 <a href="{{URL::to('sales/'.$company->id.'/update_service/'.$s->id)}}" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
                                                 @endif

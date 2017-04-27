@@ -826,8 +826,8 @@ class SalesController extends Controller {
 	public function service_list($id)
 	{
 		$datatopass  = array(
-			'title' 		=> "Service List - Beezmode",
-			'page_label'	=> "Service List",
+			'title' 		=> "Service Out of Warranty - Beezmode",
+			'page_label'	=> "Service(Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
@@ -835,34 +835,6 @@ class SalesController extends Controller {
 			'services_count' => Service::where('company_id',$id)->count()
 		);
 		return View::make('operations.sales.services.service_list',$datatopass);
-	}
-
-	public function spare_part($id)
-	{
-		$datatopass  = array(
-			'title' 		=> "Spare Part - Beezmode",
-			'page_label'	=> "Spare Part",
-			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
-			'company' 		=> Companies::where('id',$id)->first(),
-			'user'			=> Confide::user(),
-			'sparepart'		=> Spareparts::where('company_id',$id)->get(),
-			'services_count' => Service::where('company_id',$id)->count()
-		);
-		return View::make('operations.sales.services.spare_part',$datatopass);
-	}
-
-	public function technician_allowance($id)
-	{
-		$datatopass  = array(
-			'title' 		=> "Technician Allowance - Beezmode",
-			'page_label'	=> "Technician Allowance",
-			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
-			'company' 		=> Companies::where('id',$id)->first(),
-			'user'			=> Confide::user(),
-			'services' 		=> Service::where('company_id',$id)->get(),
-			'services_count' => Service::where('company_id',$id)->count()
-		);
-		return View::make('operations.sales.services.technician_allowance',$datatopass);
 	}
 
 	public function new_service_list($id)
@@ -882,8 +854,8 @@ class SalesController extends Controller {
 		public function add_service($id)
 	{
 		$datatopass  = array(
-			'title' 		=> "Add Service Report - Beezmode",
-			'page_label'	=> "Add Service Report",
+			'title' 		=> "Service Out of Warranty - Beezmode",
+			'page_label'	=> "Service(Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
@@ -893,25 +865,25 @@ class SalesController extends Controller {
 		return View::make('operations.sales.services.add_service',$datatopass);
 	}
 
-	public function add_spare_part_view($id)
+	public function technician_allowance($id)
 	{
 		$datatopass  = array(
-			'title' 		=> "Add Spare Parts - Beezmode",
-			'page_label'	=> "Add Spare Parts",
+			'title' 		=> "Technician Allowance - Beezmode",
+			'page_label'	=> "Technician Allowance(Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
-			'products'		=> Products::where('company_id',$id)->get()
-
+			'technician' 	=> Technicians::where('company_id',$id)->get(),
+			'technician_count' => Technicians::where('company_id',$id)->count()
 		);
-		return View::make('operations.sales.services.add_spare_part_view',$datatopass);
+		return View::make('operations.sales.services.technician_allowance',$datatopass);
 	}
 
 	public function add_technician_allowance_view($id)
 	{
 		$datatopass  = array(
 			'title' 		=> "Add Technician Allowance - Beezmode",
-			'page_label'	=> "Add Technician Allowance",
+			'page_label'	=> "Add Technician Allowance(Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
@@ -919,6 +891,172 @@ class SalesController extends Controller {
 
 		);
 		return View::make('operations.sales.services.add_technician_allowance_view',$datatopass);
+	}
+
+	public function update_technician_view($id,$technician_id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Update Technician Allowance - Beezmode",
+			'page_label'	=> "Update Technician Allowance(Out of Warranty)",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+			'technician'	=> Technicians::where('company_id',$id)->where('id',$technician_id)->first(),
+		);
+		return View::make('operations.sales.services.update_technician_view',$datatopass);
+	}
+
+	public function add_technician($id){
+
+			$date		 		= strip_tags(Input::get("date"));
+			$name	 			= strip_tags(Input::get("name"));
+			$particular 	 	= strip_tags(Input::get("particular"));	
+			$transpo 		 	= strip_tags(Input::get("transpo"));
+			$accommodation 		= strip_tags(Input::get("accommodation"));
+			$meals 				= strip_tags(Input::get("meals"));
+			$others 	 		= strip_tags(Input::get("others"));
+			$total 		 		= strip_tags(Input::get("total"));
+			
+			$validator = Validator::make(
+			    array(
+			        'date' 				=> $date,
+			        'name'				=> $name,
+			        'particular'		=> $particular,
+			        'transpo'			=> $transpo,
+			        'accommodation'		=> $accommodation,
+			        'meals'				=> $meals,
+			        'others'			=> $others,
+			        'total'				=> $total,
+			    ),
+			    array(
+			    	
+			        'date' 				=>'required|regex:([0-9a-zA-Z])',
+			        'name'				=>'required|regex:([0-9a-zA-Z])',
+			        'particular'		=>'required|regex:([0-9a-zA-Z])',
+			        'transpo'			=>'regex:([0-9a-zA-Z])',
+			        'accommodation'		=>'regex:([0-9a-zA-Z])',
+			        'meals'				=>'regex:([0-9a-zA-Z])',
+			        'others'			=>'regex:([0-9a-zA-Z])',
+			        'total'				=>'regex:([0-9a-zA-Z])',
+			    )
+			);
+
+			if($validator->passes())
+			{
+				
+				$add_technician = new Technicians;
+				$add_technician->company_id			=$id;
+				$add_technician->date				=$date;
+				$add_technician->name				=$name;
+				$add_technician->particular			=$particular;
+				$add_technician->transpo			=$transpo;
+				$add_technician->accommodation		=$accommodation;
+				$add_technician->meals				=$meals;
+				$add_technician->others				=$others;
+				$add_technician->total				=$total;
+				$add_technician->save();
+
+				$datatopass = array(
+					'message' => "Your Data Has Been Successfully Saved!",
+				);
+
+				return Redirect::to(URL::previous())->with('add_technician_success',$datatopass);
+			}
+			if($validator->fails())
+			{
+				return Redirect::to(URL::previous())->with('add_technician_error',$validator->messages());
+			}
+	}
+
+	public function update_technician($id,$technician_id){
+
+			$date		 		= strip_tags(Input::get("date"));
+			$name	 			= strip_tags(Input::get("name"));
+			$particular 	 	= strip_tags(Input::get("particular"));	
+			$transpo 		 	= strip_tags(Input::get("transpo"));
+			$accommodation 		= strip_tags(Input::get("accommodation"));
+			$meals 				= strip_tags(Input::get("meals"));
+			$others 	 		= strip_tags(Input::get("others"));
+			$total 		 		= strip_tags(Input::get("total"));
+			
+			$validator = Validator::make(
+			    array(
+			        'date' 				=> $date,
+			        'name'				=> $name,
+			        'particular'		=> $particular,
+			        'transpo'			=> $transpo,
+			        'accommodation'		=> $accommodation,
+			        'meals'				=> $meals,
+			        'others'			=> $others,
+			        'total'				=> $total,
+			    ),
+			    array(
+			    	
+			        'date' 				=>'required|regex:([0-9a-zA-Z])',
+			        'name'				=>'required|regex:([0-9a-zA-Z])',
+			        'particular'		=>'required|regex:([0-9a-zA-Z])',
+			        'transpo'			=>'regex:([0-9a-zA-Z])',
+			        'accommodation'		=>'regex:([0-9a-zA-Z])',
+			        'meals'				=>'regex:([0-9a-zA-Z])',
+			        'others'			=>'regex:([0-9a-zA-Z])',
+			        'total'				=>'regex:([0-9a-zA-Z])',
+			    )
+			);
+
+			if($validator->passes())
+			{
+				
+				$add_technician = Technicians::find($technician_id);
+				$add_technician->company_id			=$id;
+				$add_technician->date				=$date;
+				$add_technician->name				=$name;
+				$add_technician->particular			=$particular;
+				$add_technician->transpo			=$transpo;
+				$add_technician->accommodation		=$accommodation;
+				$add_technician->meals				=$meals;
+				$add_technician->others				=$others;
+				$add_technician->total				=$total;
+				$add_technician->save();
+
+				$datatopass = array(
+					'message' => "Record successfully updated!",
+				);
+
+				return Redirect::to(URL::previous())->with('add_technician_success',$datatopass);
+			}
+			if($validator->fails())
+			{
+				return Redirect::to(URL::previous())->with('add_technician_error',$validator->messages());
+			}
+	}
+
+	public function delete_technician($id,$technician_id)
+	{
+
+		$validator = Validator::make(
+		    array(
+		        'technician_id' => $technician_id,
+		    ),
+		    array(
+		        'technician_id' => 'required',
+		    )
+		);
+
+		if($validator->passes())
+		{
+			$delete_technician 	= Technicians::find($technician_id);
+			$prev   			= $delete_technician->$id;
+			$delete_technician->delete();
+			$datatopass = array(
+				'message' => "Record has been successfully deleted!",
+			);
+			return Redirect::to(URL::previous())->with('delete_technician_success',$datatopass);
+		}
+
+		if($validator->fails())
+		{
+			return Redirect::to(URL::previous())->with('delete_technician_error',$validator->messages());
+		}	
 	}
 
 	public function view_service_list($id,$service_id)
@@ -938,8 +1076,8 @@ class SalesController extends Controller {
 	public function update_service($id,$service_id)
 	{
 		$datatopass  = array(
-			'title' 		=> "View or Update Service Report - Beezmode",
-			'page_label'	=> "View or Update Service Report",
+			'title' 		=> "View or Update Service - Beezmode",
+			'page_label'	=> "View or Update Service (Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
@@ -949,196 +1087,50 @@ class SalesController extends Controller {
 
 	}
 
-	public function add_service_list($id){
-
-			$report_type = strip_tags(Input::get("report_type"));
-			$station_location = strip_tags(Input::get("station_location"));
-			$contact_person  = strip_tags(Input::get("contact_person"));
-			$contact_nos     = strip_tags(Input::get("contact_nos"));
-			$service_date    = strip_tags(Input::get("service_date"));
-			$pump_phone_in_concern = strip_tags(Input::get("pump_phone_in_concern"));
-			$phone_in_by = strip_tags(Input::get("phone_in_by"));
-			$call_slip_no  = strip_tags(Input::get("call_slip_no"));
-			$time_start     = strip_tags(Input::get("time_start"));
-			$time_end    = strip_tags(Input::get("time_end"));			
-			$pump_manufacturer = strip_tags(Input::get("pump_manufacturer"));
-			$pump_model  = strip_tags(Input::get("pump_model"));
-			$pump_serial_no     = strip_tags(Input::get("pump_serial_no"));
-			$service_by    = strip_tags(Input::get("service_by"));
-			$pump_no = strip_tags(Input::get("pump_no"));
-			$hose_no = strip_tags(Input::get("hose_no"));
-			$product  = Input::get("product");
-			$totalizer_before_service     = strip_tags(Input::get("totalizer_before_service"));
-			$totalizer_after_service    = strip_tags(Input::get("totalizer_after_service"));
-			$total_ltrs_used = strip_tags(Input::get("total_ltrs_used"));
-			$pump_condition_before_repair = strip_tags(Input::get("pump_condition_before_repair"));
-			$work_details  = strip_tags(Input::get("work_details"));
-			$remarks_result     = strip_tags(Input::get("remarks_result"));
-			$final_counter_measure    = strip_tags(Input::get("final_counter_measure"));
-			$ten_ltrs_calibration_check = strip_tags(Input::get("ten_ltrs_calibration_check"));
-			$one_ltr_calibration_check = strip_tags(Input::get("one_ltr_calibration_check"));
-			$qty_unit = strip_tags(Input::get("qty_unit"));
-			$replace_parts  = strip_tags(Input::get("replace_parts"));
-			$unit_cost     = strip_tags(Input::get("unit_cost"));
-			$unit_total    = strip_tags(Input::get("unit_total"));
-			$under_warranty = strip_tags(Input::get("under_warranty"));
-			$charge_to  = strip_tags(Input::get("charge_to"));
-			$conforme     = strip_tags(Input::get("conforme"));
-			$service_charge    = strip_tags(Input::get("service_charge"));
-			$service_total = strip_tags(Input::get("service_total"));
-
-			$validator = Validator::make(
-			    array(
-			    	'report_type'		=>$report_type,
-			        'station_location' 	=> $station_location,
-			        'contact_person'	=> $contact_person,
-			        'contact_nos'		=> $contact_nos,
-			        'service_date'		=> $service_date,
-			        'pump_phone_in_concern'	=> $pump_phone_in_concern,
-			        'phone_in_by' 		=> $phone_in_by,
-			        'call_slip_no'		=> $call_slip_no,
-			        'time_start'		=> $time_start,
-			        'time_end'			=> $time_end,
-			        'pump_manufacturer' 	=> $pump_manufacturer,
-			        'pump_model'	=> $pump_model,
-			        'pump_serial_no'		=> $pump_serial_no,
-			        'service_by'		=> $service_by,
-			        'pump_no'	=> $pump_no,
-			        'hose_no'		=> $hose_no,
-			        'product'		=> $product,
-			        'totalizer_before_service'	=> $totalizer_before_service,
-			        'totalizer_after_service'	=> $totalizer_after_service,
-			        'total_ltrs_used'	=> $total_ltrs_used,
-			        'pump_condition_before_repair'	=> $pump_condition_before_repair,
-			        'work_details'	=> $work_details,
-			        'remarks_result'	=> $remarks_result,
-			        'final_counter_measure'	=> $final_counter_measure,
-			        'ten_ltrs_calibration_check' => $ten_ltrs_calibration_check,
-			        'one_ltr_calibration_check' => $one_ltr_calibration_check,
-			        'qty_unit'	=> $qty_unit,
-			        'replace_parts'	=> $replace_parts,
-			        'unit_cost'	=> $unit_cost,
-			        'unit_total'	=> $unit_total,
-			        'under_warranty' => $under_warranty,
-			        'charge_to'	=> $charge_to,
-			        'conforme'	=> $conforme,
-			        'service_charge'	=> $service_charge,
-			        'service_total'	=> $service_total,
-			    ),
-			    array(
-			    	'report_type'		=>'required|regex:([0-9a-zA-Z])',
-			        'station_location' 	=>'required|regex:([0-9a-zA-Z])',
-			        'contact_person'	=>'required|regex:([0-9a-zA-Z])',
-			        'contact_nos'		=>'required|regex:([0-9a-zA-Z])',
-			        'service_date'		=> 'regex:([0-9a-zA-Z])',
-			        'pump_phone_in_concern' => 'regex:([0-9a-zA-Z])',
-			        'phone_in_by'		=> 'regex:([0-9a-zA-Z])',
-			        'call_slip_no'		=> 'min:3',
-			        'time_start'		=> 'date_format:H:i',
-			        'time_end'			=> 'date_format:H:i|after:time_start',
-			        'pump_manufacturer' 	=> 'regex:([0-9a-zA-Z])',
-			        'pump_model'	=> 'required|regex:([0-9a-zA-Z])',
-			        'pump_serial_no'		=> 'required|regex:([0-9a-zA-Z])',
-			        'service_by'		=> 'regex:([0-9a-zA-Z])',
-			        'pump_no'	=> 'required|regex:([0-9a-zA-Z])',
-			        'hose_no'		=> 'min:3',
-			        'product'		=> 'required|array',
-			        'totalizer_before_service'	=> 'regex:([0-9a-zA-Z])',
-			        'totalizer_after_service'	=> 'regex:([0-9a-zA-Z])',
-			        'total_ltrs_used'	=> 'regex:([0-9a-zA-Z])',
-			        'pump_condition_before_repair'	=> 'regex:([0-9a-zA-Z])',
-			        'work_details'	=> 'regex:([0-9a-zA-Z])',
-			        'remarks_result'	=> 'regex:([0-9a-zA-Z])',
-			        'final_counter_measure'	=> 'regex:([0-9a-zA-Z])',
-			        'ten_ltrs_calibration_check' => 'regex:([0-9a-zA-Z])',
-			        'one_ltr_calibration_check' => 'regex:([0-9a-zA-Z])',
-			        'qty_unit'	=> 'min:1',
-			        'replace_parts'	=> 'regex:([0-9a-zA-Z])',
-			        'unit_cost'	=> 'min:1',
-			        'unit_total'	=> 'min:1',
-			        'under_warranty' => 'regex:([0-9a-zA-Z])',
-			        'charge_to'	=> 'regex:([0-9a-zA-Z])',
-			        'conforme'	=> 'regex:([0-9a-zA-Z])',
-			        'service_charge'	=> 'regex:([0-9a-zA-Z])',
-			        'service_total'	=> 'min:1',
-			    )
-			);
-
-			if($validator->passes())
-			{
-				
-				$add_service_list = new Service;
-				$add_service_list->company_id =$id;
-				$add_service_list->service_code	= uniqid();
-				$add_service_list->report_type	=$report_type;
-				$add_service_list->station_location	=$station_location;
-				$add_service_list->contact_person	=$contact_person;
-				$add_service_list->contact_nos		=$contact_nos;
-				$add_service_list->service_date		=$service_date;
-				$add_service_list->pump_phone_in_concern =$pump_phone_in_concern;
-				$add_service_list->phone_in_by		=$phone_in_by;
-				$add_service_list->call_slip_no		=$call_slip_no;
-				$add_service_list->time_start		=$time_start;
-				$add_service_list->time_end			=$time_end;
-				$add_service_list->pump_manufacturer 	= $pump_manufacturer;
-			    $add_service_list->pump_model	= $pump_model;
-			    $add_service_list->pump_serial_no		= $pump_serial_no;
-			    $add_service_list->service_by		= $service_by;
-			    $add_service_list->pump_no	= $pump_no;
-			    $add_service_list->hose_no		= $hose_no;
-			    $add_service_list->product		= json_encode($product);
-			    $add_service_list->totalizer_before_service	= $totalizer_before_service;
-			    $add_service_list->totalizer_after_service	= $totalizer_after_service;
-			    $add_service_list->total_ltrs_used	= $total_ltrs_used;
-			    $add_service_list->pump_condition_before_repair	= $pump_condition_before_repair;
-			    $add_service_list->work_details	=$work_details;
-			    $add_service_list->remarks_result	= $remarks_result;
-			    $add_service_list->final_counter_measure	= $final_counter_measure;
-			    $add_service_list->ten_ltrs_calibration_check = $ten_ltrs_calibration_check;
-			    $add_service_list->one_ltr_calibration_check = $one_ltr_calibration_check;
-			    $add_service_list->qty_unit	= $qty_unit;
-			    $add_service_list->replace_parts	= $replace_parts;
-			    $add_service_list->unit_cost	= $unit_cost;
-			   	$add_service_list->unit_total	= $unit_total;
-			    $add_service_list->under_warranty = $under_warranty;
-			    $add_service_list->charge_to	= $charge_to;
-			    $add_service_list->conforme	= $conforme;
-			    $add_service_list->service_charge	= $service_charge;
-			    $add_service_list->service_total	= $service_total;	
-				$add_service_list->save();
-
-				$datatopass = array(
-					'message' => "You have succesfully saved your service list!",
-				);
-
-				return Redirect::to(URL::previous())->with('add_service_list_success',$datatopass);
-			}
-			if($validator->fails())
-			{
-				return Redirect::to(URL::previous())->with('add_service_list_error',$validator->messages());
-			}
-	}
-
 	public function add_service_report($id){
 
-			$station_location	 = strip_tags(Input::get("station_location"));
-			$contact_person 	 = strip_tags(Input::get("contact_person"));	
 			$service_date		 = strip_tags(Input::get("service_date"));
-			$service_total 		 = strip_tags(Input::get("service_total"));
+			$sr_no	 			 = strip_tags(Input::get("sr_no"));
+			$station_location 	 = strip_tags(Input::get("station_location"));	
+			$address 		 	 = strip_tags(Input::get("address"));
+			$service_by 		 = strip_tags(Input::get("service_by"));
+			$work_details 		 = strip_tags(Input::get("work_details"));
+			$remarks_result 	 = strip_tags(Input::get("remarks_result"));
+			$item 		 		 = strip_tags(Input::get("item"));
+			$unit_cost 		 	 = strip_tags(Input::get("unit_cost"));
+			$qty 		 		 = strip_tags(Input::get("qty"));
+			$service_charge 	 = strip_tags(Input::get("service_charge"));
+			$total 	 			 = strip_tags(Input::get("total"));
 
 			$validator = Validator::make(
 			    array(
-			        'station_location' 	=> $station_location,
-			        'contact_person'	=> $contact_person,
+			        'sr_no' 			=> $sr_no,
 			        'service_date'		=> $service_date,
-			        'service_total'		=> $service_total,
+			        'station_location'	=> $station_location,
+			        'address'			=> $address,
+			        'service_by'		=> $service_by,
+			        'work_details'		=> $work_details,
+			        'remarks_result'	=> $remarks_result,
+			        'item'				=> $item,
+			        'unit_cost'			=> $unit_cost,
+			        'qty'				=> $qty,
+			        'service_charge'	=> $service_charge,
+			        'total'				=> $total,
 			    ),
 			    array(
 			    	
-			        'station_location' 	=>'required|regex:([0-9a-zA-Z])',
-			        'contact_person'	=>'required|regex:([0-9a-zA-Z])',
-			        'service_date'		=>'regex:([0-9a-zA-Z])',
-			        'service_total'		=>'required|regex:([0-9a-zA-Z])',
+			        'sr_no' 			=>'required|regex:([0-9a-zA-Z])',
+			        'service_date'		=>'required|regex:([0-9a-zA-Z])',
+			        'station_location'	=>'required|regex:([0-9a-zA-Z])',
+			        'address'			=>'regex:([0-9a-zA-Z])',
+			        'service_by'		=>'required|regex:([0-9a-zA-Z])',
+			        'work_details'		=>'required|regex:([0-9a-zA-Z])',
+			        'remarks_result'	=>'required|regex:([0-9a-zA-Z])',
+			        'item'				=>'regex:([0-9a-zA-Z])',
+			        'unit_cost'			=>'regex:([0-9a-zA-Z])',
+			        'qty'				=>'regex:([0-9a-zA-Z])',
+			        'service_charge'	=>'regex:([0-9a-zA-Z])',
+			        'total'				=>'regex:([0-9a-zA-Z])',
 			    )
 			);
 
@@ -1147,15 +1139,22 @@ class SalesController extends Controller {
 				
 				$add_service_list = new Service;
 				$add_service_list->company_id		=$id;
-				$add_service_list->service_code		= uniqid();
-				$add_service_list->station_location	=$station_location;
-				$add_service_list->contact_person	=$contact_person;
 				$add_service_list->service_date		=$service_date;
-			    $add_service_list->service_total	= $service_total;	
+				$add_service_list->sr_no			=$sr_no;
+				$add_service_list->station_location	=$station_location;
+				$add_service_list->address			=$address;
+				$add_service_list->service_by		=$service_by;
+				$add_service_list->work_details		=$work_details;
+				$add_service_list->remarks_result	=$remarks_result;
+				$add_service_list->item				=$item;
+				$add_service_list->unit_cost		=$unit_cost;
+				$add_service_list->qty				=$qty;
+				$add_service_list->service_charge	=$service_charge;
+				$add_service_list->total			=$total;
 				$add_service_list->save();
 
 				$datatopass = array(
-					'message' => "You have succesfully saved your service list!",
+					'message' => "Your Data Has Been Successfully Saved!",
 				);
 
 				return Redirect::to(URL::previous())->with('add_service_list_success',$datatopass);
@@ -1166,60 +1165,84 @@ class SalesController extends Controller {
 			}
 	}
 
-	public function add_sparepart($id){
+	public function update_service_report($id,$service_id)
+	{
 
-			$date	 		 = strip_tags(Input::get("date"));
-			$account_name 	 = strip_tags(Input::get("account_name"));	
-			$product		 = strip_tags(Input::get("product"));
-			$amount 		 = strip_tags(Input::get("amount"));
-			$qty 			 = strip_tags(Input::get("qty"));
-			$total 			 = strip_tags(Input::get("total"));
+			$service_date		 = strip_tags(Input::get("service_date"));
+			$sr_no	 			 = strip_tags(Input::get("sr_no"));
+			$station_location 	 = strip_tags(Input::get("station_location"));	
+			$address 		 	 = strip_tags(Input::get("address"));
+			$service_by 		 = strip_tags(Input::get("service_by"));
+			$work_details 		 = strip_tags(Input::get("work_details"));
+			$remarks_result 	 = strip_tags(Input::get("remarks_result"));
+			$item 		 		 = strip_tags(Input::get("item"));
+			$unit_cost 		 	 = strip_tags(Input::get("unit_cost"));
+			$qty 		 		 = strip_tags(Input::get("qty"));
+			$service_charge 	 = strip_tags(Input::get("service_charge"));
+			$total 	 			 = strip_tags(Input::get("total"));
 
 			$validator = Validator::make(
 			    array(
-			        'date' 				=> $date,
-			        'account_name'		=> $account_name,
-			        'product'			=> $product,
-			        'amount'			=> $amount,
+			        'sr_no' 			=> $sr_no,
+			        'service_date'		=> $service_date,
+			        'station_location'	=> $station_location,
+			        'address'			=> $address,
+			        'service_by'		=> $service_by,
+			        'work_details'		=> $work_details,
+			        'remarks_result'	=> $remarks_result,
+			        'item'				=> $item,
+			        'unit_cost'			=> $unit_cost,
 			        'qty'				=> $qty,
+			        'service_charge'	=> $service_charge,
 			        'total'				=> $total,
 			    ),
 			    array(
 			    	
-			        'date' 			=>'required|regex:([0-9a-zA-Z])',
-			        'account_name'	=>'required|regex:([0-9a-zA-Z])',
-			        'product'		=>'required|regex:([0-9a-zA-Z])',
-			        'amount'		=>'required|regex:([0-9a-zA-Z])',
-			        'qty'			=>'required|regex:([0-9a-zA-Z])',
-			        'total'			=>'required|regex:([0-9a-zA-Z])',
+			        'sr_no' 			=>'required|regex:([0-9a-zA-Z])',
+			        'service_date'		=>'required|regex:([0-9a-zA-Z])',
+			        'station_location'	=>'required|regex:([0-9a-zA-Z])',
+			        'address'			=>'regex:([0-9a-zA-Z])',
+			        'service_by'		=>'required|regex:([0-9a-zA-Z])',
+			        'work_details'		=>'required|regex:([0-9a-zA-Z])',
+			        'remarks_result'	=>'required|regex:([0-9a-zA-Z])',
+			        'item'				=>'regex:([0-9a-zA-Z])',
+			        'unit_cost'			=>'regex:([0-9a-zA-Z])',
+			        'qty'				=>'regex:([0-9a-zA-Z])',
+			        'service_charge'	=>'regex:([0-9a-zA-Z])',
+			        'total'				=>'regex:([0-9a-zA-Z])',
 			    )
 			);
 
 			if($validator->passes())
 			{
 				
-				$add_sparepart = new Spareparts;
-				$add_sparepart->company_id		=$id;
-				$add_sparepart->date			=$date;
-				$add_sparepart->account_name	=$account_name;
-				$add_sparepart->product			=$product;
-				$add_sparepart->amount			=$amount;
-				$add_sparepart->qty				=$qty;
-				$add_sparepart->total			=$total;
-				$add_sparepart->save();
+				$add_service_list = Service::find($service_id);
+				$add_service_list->company_id		=$id;
+				$add_service_list->service_date		=$service_date;
+				$add_service_list->sr_no			=$sr_no;
+				$add_service_list->station_location	=$station_location;
+				$add_service_list->address			=$address;
+				$add_service_list->service_by		=$service_by;
+				$add_service_list->work_details		=$work_details;
+				$add_service_list->remarks_result	=$remarks_result;
+				$add_service_list->item				=$item;
+				$add_service_list->unit_cost		=$unit_cost;
+				$add_service_list->qty				=$qty;
+				$add_service_list->service_charge	=$service_charge;
+				$add_service_list->total			=$total;
+				$add_service_list->save();
 
 				$datatopass = array(
-					'message' => "You have succesfully saved your Spare Parts list!",
+					'message' => "Record successfully updated!",
 				);
 
-				return Redirect::to(URL::previous())->with('add_spareparts_success',$datatopass);
+				return Redirect::to(URL::previous())->with('add_service_list_success',$datatopass);
 			}
 			if($validator->fails())
 			{
-				return Redirect::to(URL::previous())->with('add_spareparts_error',$validator->messages());
+				return Redirect::to(URL::previous())->with('add_service_list_error',$validator->messages());
 			}
 	}
-
 
 	public function delete_service_list($id,$service_id)
 	{
@@ -1239,7 +1262,7 @@ class SalesController extends Controller {
 			$prev   			= $delete_service_list->$id;
 			$delete_service_list->delete();
 			$datatopass = array(
-				'message' => "You have succesfully deleted service",
+				'message' => "Record has been successfully deleted!",
 			);
 			return Redirect::to(URL::previous())->with('delete_service_list_success',$datatopass);
 		}

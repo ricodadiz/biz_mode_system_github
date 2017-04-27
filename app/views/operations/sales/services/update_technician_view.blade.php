@@ -27,20 +27,20 @@
                             <h3 class="block-title">Add Technician Allowance</h3>
                         </div>
                         <div class="block-content">
-                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_technician')}}" method="post">
+                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/update_technician/'.$technician->id)}}" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Date</label>
-                                                <input class="form-control input-lg" type="date" id="date" name="date">
+                                                <input class="form-control input-lg" type="date" id="date" name="date" value="{{$technician->date}}">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-firstname">Name of Technician</label>
-                                                <input class="form-control input-lg" type="text" id="name" name="name" placeholder="Enter Technician Name">
+                                                <input class="form-control input-lg" type="text" id="name" name="name" value="{{$technician->name}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -50,13 +50,13 @@
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Particulars</label>
-                                                <input class="form-control input-lg" type="text" id="particular" name="particular" placeholder="Enter Location or  Station">
+                                                <input class="form-control input-lg" type="text" id="particular" name="particular" value="{{$technician->particular}}">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Transpo</label>
-                                                <input class="form-control input-lg" type="text" id="transpo" name="transpo" placeholder="Enter Transpo">
+                                                <input class="form-control input-lg" type="text" id="transpo" name="transpo" value="{{$technician->transpo}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -68,14 +68,14 @@
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Accommodation</label>
-                                                <input class="form-control input-lg" type="text" id="accommodation" name="accommodation" placeholder="Enter Accommodation">
+                                                <input class="form-control input-lg" type="text" id="accommodation" name="accommodation" value="{{$technician->accommodation}}">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Meals</label>
                                                 <input class="form-control input-lg" type="number" id="meals" name="meals"
-                                                placeholder="Enter Meals">
+                                                value="{{$technician->meals}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -85,13 +85,13 @@
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Others</label>
-                                                <input class="form-control input-lg" type="text" id="others" name="others" placeholder="Others">
+                                                <input class="form-control input-lg" type="text" id="others" name="others" value="{{$technician->others}}">
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-material">
                                                 <label for="mega-lastname">Total</label>
-                                                <input class="form-control input-lg" type="number" id="total" name="total">
+                                                <input class="form-control input-lg" type="number" id="total" name="total" value="{{$technician->total}}">
                                                 </div>
                                             </div>
                                         </div>
