@@ -89,7 +89,7 @@ class AppController extends BaseController {
 			'member_count' 	=> CompanyMember::where('company_id',$id)->count(),
 			'product_count' => Products::where('company_id',$id)->count(), 
 			'products'		=> Products::where('company_id',$id)->paginate(15),
-			'total_sales'   => OrdersGeneric::where('company_id',$id)->sum('sales'),
+			// 'total_sales'   => OrdersGeneric::where('company_id',$id)->sum('sales'),
 		);
 		return View::make('app.company_profile',$datatopass);
 	}
