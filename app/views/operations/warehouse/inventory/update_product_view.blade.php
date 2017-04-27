@@ -93,7 +93,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-primary">
-                                                    <input class="form-control" type="date" id="add-product" name="warranty" value="{{$product->warranty}}">
+                                                    <input class="form-control" type="text" id="add-product" name="warranty" value="{{$product->warranty}}">
                                                     <label for="product-id">Warranty Date</label>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-primary">
-                                                    <input class="form-control" type="number" id="stock-product" name="stock-product" value="{{$product->in_stock}}">
+                                                    <input class="form-control" disabled type="number" id="stock-product" name="stock-product" value="{{$product->in_stock}}">
                                                     <label for="product-name">Stock</label>
                                                 </div>
                                             </div>

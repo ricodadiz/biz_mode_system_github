@@ -98,7 +98,7 @@
                                         <th class="hidden-xs text-center">Category</th>
                                         <th class="hidden-xs text-center">In Stock</th>
                                         <th class="hidden-xs text-center">Status</th>
-                                        <th class="hidden-xs text-center">Warranty Status</th>
+                                        <th class="hidden-xs text-center">Product Warranty</th>
                                         <th class="hidden-xs text-right">Product Price</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -128,7 +128,7 @@
                                         @endif
                                         </td>
                                         <td class="text-center">
-                                        
+                                            {{$p->warranty}} Days
                                         </td>
                                         <td class="text-right hidden-xs">
                                             <strong>{{$p->product_price}}</strong>

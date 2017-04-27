@@ -342,7 +342,7 @@ class OrderAppController extends BaseController {
 
 		if($validator->passes())
 		{
-			$delete_order 		= OrdersGeneric::find($order_id);
+			$delete_order 		= OrdersProduct::find($order_id);
 			$delete_order		->delete();
 			$datatopass 		= array(
 				'message' => "You have succesfully deleted",
