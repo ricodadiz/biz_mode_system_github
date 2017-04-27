@@ -28,19 +28,19 @@
                             <div class="row items-push-2x">
                                 <!-- Company Info -->
                                 <div class="col-xs-6 col-sm-4 col-lg-3">
-                                    <p class="h1 font-w400 push-5">{{$company->company_name}}</p>
-                                    <p class="h4 font-w400 push-5">{{$order->recipient_name}}</p>
+                                    <p class="h4 font-w400 push-5"></p>
                                     <address>
+                                        <b>Customer Name: </b>{{$clients->client_customer_name}}<br>
                                         <b>Shipping Address: </b>{{$clients->client_shipping_address}}<br>
                                         <b>Billing Address: </b>{{$clients->client_billing_address}}<br><br>
                                         <i class="si si-call-end"> {{$clients->client_contact_number}}</i><br>
                                         <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)">{{$clients->client_email_address}}</a>
                                     </address>
-                                    @if($order->tin == '')
+                                   {{--  @if($order->tin == '')
                                     <p> </p>
                                     @else
                                     <p>TIN: {{$order->tin}}</p>
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <!-- END Company Info -->
                             </div>
@@ -51,7 +51,6 @@
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 50px;">Product ID</th>
                                             <th>Product</th>
                                             <th class="text-center" style="width: 100px;">Quantity</th>
                                             <th class="text-right" style="width: 120px;">Product Cost</th>
@@ -59,20 +58,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php $totalprice=0; ?>
-                                    @foreach($product_in_orders as $pio)
+                                        @foreach($orders_product as $op)
                                         <tr>
-                                            <td class="text-center">{{Products::find($pio->product_id)->model_code}}</td>
                                             <td>
-                                            <p class="font-w600 push-10">{{Products::find($pio->product_id)->product_name}}</p>
+                                            <p class="font-w600 push-10">{{$op->products}}</p>
                                                <!--  <div class="text-muted">Design/Development of iOS and Android application</div> -->
                                             </td>
-                                            <td class="text-center"><span class="badge badge-primary">{{$pio->qty}}</span></td>
-                                            <td class="text-right">₱ {{Products::find($pio->product_id)->product_price}}</td>
-                                            <td class="text-right">₱ {{Products::find($pio->product_id)->product_price * $pio->qty}}</td>
+                                            <td class="text-center"><span class="badge badge-primary">{{$op->quantity}}</span></td>
+                                            <td class="text-right">₱ {{$op->price}}</td>
+                                            <td class="text-right">₱ {{$op->amount}}</td>
+                                        @endforeach
                                         </tr>
-                                    <?php $totalprice += Products::find($pio->product_id)->product_price * $pio->qty ;?>
-                                    @endforeach
                                         <!-- <tr>
                                             <td colspan="4" class="font-w600 text-right">Subtotal</td>
                                             <td class="text-right">$ 27.500,00</td>
@@ -89,31 +85,26 @@
                                             <td colspan="4" class="font-w700 text-uppercase text-right">Total Due</td>
                                             <td class="font-w700 text-right">$ 33.000,00</td>
                                         </tr> -->
-                                         <tr>
-                                            <td colspan="4" class="text-right"><strong>Sub Total Price:</strong></td>
-                                            <?php $ft = $totalprice; ?>
-                                            <td class="text-right">{{$totalprice}} + {{$vat*100}}% as vat</td>
-                                        </tr>
-                                            <?php 
-                                                $totalprice *= $vat;
-                                                $subt = $totalprice + $ft; 
-                                            ?>
+                                        @foreach($orders_generic as $og)   
                                         <tr>
-                                            <td colspan="4" class="font-w600 text-right">Total Price</td>
-                                            <td class="text-right">₱ {{$subt}}</td>
+                                            <td colspan="3" class="font-w600 text-right">Total Price</td>
+                                            <td class="text-right">₱ {{$og->total_amount}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="font-w600 text-right">Amount Paid</td>
-                                            <td class="text-right">₱ {{$order->paid}}</td>
+                                            <td colspan="3" class="font-w600 text-right">Amount Paid</td>
+                                            <td class="text-right">₱ {{$og->amount_paid}}</td>
                                         </tr>
                                         <tr class="active">
-                                         @if($order->paid > $subt)
-                                            <td colspan="4" class="text-right text-uppercase"><strong>Change:</strong></td>
-                                            <td class="text-right"><strong>₱ {{$order->paid - $subt }}</strong></td>
-                                        @elseif ($order->paid < $subt)
-                                            <td colspan="4" class="text-right text-uppercase"><strong>Balance:</strong></td>
-                                            <td class="text-right"><strong>₱ {{$order->paid - $subt}}</strong></td>
+                                         @if($og->amount_paid > $og->total_amount)
+                                            <?php $change = $og->amount_paid - $og->total_amount; ?>
+                                            <td colspan="3" class="text-right text-uppercase"><strong>Change:</strong></td>
+                                            <td class="text-right"><strong>₱ {{$change}}</strong></td>
+                                        @else
+                                        <?php $balance= $og->amount_paid - $og->total_amount ; ?>
+                                            <td colspan="3" class="text-right text-uppercase"><strong>Balance:</strong></td>
+                                            <td class="text-right"><strong>₱ {{$balance}}</strong></td>
                                         @endif
+                                        @endforeach
                                         </tr>
                                     </tbody>
                                 </table>

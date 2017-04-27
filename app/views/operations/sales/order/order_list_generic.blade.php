@@ -66,28 +66,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($orders as $o)
+                                  @foreach($orders_generic as $og)
                                     <tr>
-                                        <td class="text-center">{{$o->order_id}}</td>
-                                        <td class="font-w600">{{$o->customer_name}}</td>
-                                        <td class="hidden-xs">{{$o->date_order}}</td>
-                                        {{-- <td>
-                                            <span class="label label-info">{{$o->delivery_status}}</span>
-                                        </td> --}}
-                                        <!-- <td class="hidden-xs">{{$o->products}}</td>
-                                        <td class="hidden-xs">
-                                            <strong>{{$o->total}}</strong>
-                                        </td> -->
+                                        <td class="text-center">{{$og->id}}</td>
+                                        <td class="font-w600">{{$og->customer_name}}</td>
+                                        <td class="hidden-xs">{{$og->date_order}}</td>
+                                        
                                         <td class="text-center">
                                             <div class="btn-group">
-                                               <!--  <a href="{{URL::to('sales/'.$company->id.'/order_update_generic_view/'.$o->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Order"><i class="fa fa-pencil text-primary"></i></a> -->
-                                               <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$o->order_id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Invoice"><i class="fa fa-info-circle text-info"></i></a>
-                                                <a href="{{URL::to('sales/'.$company->id.'/view_order/'.$o->order_id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Order Info"><i class="fa fa-eye text-info"></i></a>
-                                                <a data-toggle="modal" data-target="#modal-popout-{{$o->id}}" class="btn btn-xs btn-default" type="button" title="Remove Order"><i class="fa fa-times text-danger"></i></a>
+                                               <!--  <a href="{{URL::to('sales/'.$company->id.'/order_update_generic_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Order"><i class="fa fa-pencil text-primary"></i></a> -->
+                                               <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Invoice"><i class="fa fa-info-circle text-info"></i></a>
+                                                <a href="{{URL::to('sales/'.$company->id.'/view_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Order Info"><i class="fa fa-eye text-info"></i></a>
+                                                <a data-toggle="modal" data-target="#modal-popout-{{$og->id}}" class="btn btn-xs btn-default" type="button" title="Remove Order"><i class="fa fa-times text-danger"></i></a>
                                             </div>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modal-popout-{{$o->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="modal-popout-{{$og->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout">
                                             <div class="modal-content">
                                                 <div class="block block-themed block-transparent remove-margin-b">
@@ -100,12 +94,12 @@
                                                         <h3 class="block-title">Confirm Delete Order</h3>
                                                     </div>
                                                     <div class="block-content">
-                                                        You are about to delete order ID "{{$o->order_id}}".
+                                                        You are about to delete order ID "{{$og->id}}".
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                                                    <a href="{{URL::to('sales/'.$company->id.'/delete_order/'.$o->id)}}">
+                                                    <a href="{{URL::to('sales/'.$company->id.'/delete_order/'.$og->id)}}">
                                                     <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-check"></i> Ok</button>
                                                     </a>
                                                 </div>

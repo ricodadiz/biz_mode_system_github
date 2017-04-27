@@ -9,7 +9,7 @@
                                 <div class="block-content block-content-full">
                                     <span class="item item-circle bg-success-light"><i class="fa fa-shopping-cart fa-1.5x"></i></span>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Order ID: </div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Reference No: {{$ref_no}} </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-3">
@@ -42,56 +42,65 @@
                     <!-- Products -->
                     <div class="block">
                         <div class="block-header bg-gray-lighter">
-                            <h3 class="block-title">Products</h3>
+                            <h3 class="block-title">Order Information</h3>
                         </div>
                         <div class="block-content">
                             <div class="table-responsive">
                                 <table class="table table-borderless table-striped table-vcenter">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 100px;">ID</th>
                                             <th class="text-left">Product Name</th>
                                             {{-- <th class="text-left">UNIT</th> --}}
                                             <th class="text-left">ORDER DATE</th>
-                                            <th class="text-center">Quantity</th>
+                                            <th class="text-left">Warehouse</th>
+                                            <th class="text-right">Quantity</th>
                                             <th class="text-right" style="width: 10%;">UNIT COST</th>
-                                            <th class="text-right" style="width: 10%;">PRICE</th>
+                                            <th class="text-right" style="width: 10%;">Amount</th>
                                         </tr>
+                                   
                                     </thead>
                                     <tbody>
-                                    @foreach($orders_product as $op)
-                                  
+                                    
+                                        @foreach($orders_product as $op)
                                         <tr>
-                                            <td class="text-center"><a><strong></strong></a></td>
-                                            {{-- <td><a href="">{{Products::find($pio->products)->product_name}}</a></td> --}}
-                                            <td>{{$op->warehouse}}</td>
-                                            <td></td>
+                                            <td><strong>{{$op->products}}</strong></td>
+                                            <td><strong>{{$date_order}}</strong></td>
+                                            <td><strong>{{$op->warehouse}}</strong></td>
+                                            <td class="text-right"><strong>{{$op->quantity}}</strong></td>
+                                            <td class="text-right"><strong>{{$op->price}}</strong></td>
+                                            <td class="text-right"><strong>{{$op->amount}}</strong></td>
                                             {{-- <td class="text-center"><strong>{{$pio->qty}}</strong></td>
                                             <td class="text-right">{{Products::find($pio->product_id)->product_price}}</td>
                                             <td class="text-right">{{Products::find($pio->product_id)->product_price * $pio->qty}}</td> --}}
-                                        </tr>
-                                    
-                                        <tr>
-                                            <td colspan="6" class="text-right"><strong>Sub Total Price:</strong></td>
-                                           
-                                        </tr>
-                                            
-                                        <tr>
-                                            <td colspan="6" class="text-right"><strong>Total Price:</strong></td>
-                                            <td class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right"><strong>Total Paid:</strong></td>
-                                            <td class="text-right"></td>
+                                        @endforeach
                                         </tr>
                                         
+                                        @foreach($orders_generic as $og)                                           
+                                        <tr>
+                                            <td colspan="5" class="text-right"><strong>Total Price:</strong></td>
+                                            <td class="text-right"> <strong> {{$og->total_amount}} </strong> </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="text-right"><strong>Total Paid:</strong></td>
+                                            <td class="text-right"> <strong> {{$og->amount_paid}} </strong></td>
+                                        
+                                        @endforeach
+                                        </tr>
+                                        
+
+                                        @if($og->amount_paid > $og->total_amount)
+                                        <?php $change = $og->total_amount - $og->amount_paid; ?>
                                         <tr class="success">
-                                        
-                                            <td colspan="6" class="text-right text-uppercase"><strong>Change:</strong></td>
+                                            <td colspan="6" class="text-right text-uppercase"><strong>Change: {{$change}}</strong></td>
                                             <td class="text-right"><strong></strong></td>
-                                
                                         </tr>
-                                @endforeach
+                                        @else
+                                        <?php $debt = $og->amount_paid - $og->total_amount ; ?>
+                                        <tr class="danger">
+                                            <td colspan="6" class="text-right text-uppercase"><strong>Debt: {{$debt}}</strong></td>
+                                            <td class="text-right"><strong></strong></td>
+                                        </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -105,38 +114,22 @@
                             <!-- Shipping Address -->
                             <div class="block">
                                 <div class="block-header bg-gray-lighter">
-                                    <h3 class="block-title">Info</h3>
+                                    <h3 class="block-title">Customer Info</h3>
                                 </div>
-                                <div class="block-content block-content-full">
-                                    <div class="h4 push-5"><b>Customer Name:</b></div>
+                                 <div class="block-content block-content-full">
+                                   
+                                    <div class="h4 push-3"><b>Company Name: {{$clients->client_company_name}}</b></div>
+                                    <div class="h4 push-3"><b>Customer Name: {{$clients->client_customer_name}}</b></div>
                                     <address>
-                                        <b>Shipping Address</b><br>
-                                        <b>Billing Address</b><br><br>
-                                        <i class="fa fa-phone"></i> <br>
-                                        <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)"></a>
+                                        <b>Shipping Address: {{$clients->client_shipping_address }}</b><br>
+                                        <b>Billing Address:  {{$clients->client_billing_address}}</b><br><br>
+                                        <i class="fa fa-phone"></i> {{$clients->client_contact_number}}<br>
+                                        <i class="fa fa-envelope-o"></i> <a href="javascript:void(0)"> {{$clients->client_email_address}}</a>
                                     </address>
+                                  
                                 </div>
                             </div>
                             <!-- END Shipping Address -->
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- Billing Address -->
-                            <div class="block">
-                                <div class="block-header bg-gray-lighter">
-                                    <h3 class="block-title"></h3>
-                                </div>
-                                <div class="block-content block-content-full">
-                                    <div class="h4 push-5">Payment type: {{-- {{Payments::find($order->payment_type)["payment_name"]}} --}}</div>
-                                    <address>
-                                        Due:<br>
-                                        Terms:<br>
-                                        Tin:<br>
-                                        OSCA/PWD ID #:<br>
-                                        Business Style:
-                                    </address>
-                                </div>
-                            </div>
-                            <!-- END Billing Address -->
                         </div>
                         
                     </div>

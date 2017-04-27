@@ -14,8 +14,7 @@ class CreateOrdersproductsTable extends Migration {
 	{
 		Schema::create('orders_products', function ($table) {
             $table->increments('id');
-            $table->string('product_id');
-            $table->string('product_order_id');
+            $table->string('order_id');
             $table->string('products');
             $table->string('warehouse');
         	$table->string('category');

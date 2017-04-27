@@ -55,7 +55,7 @@
                                                     <select class="js-select2 form-control" name="customer-name" style="width: 100%;">
                                                         <option selected disabled></option>
                                                         @foreach($clients as $c)
-                                                            <option value="{{$c->client_customer_name}}">
+                                                            <option value="{{$c->id}}">
                                                                 {{$c->client_customer_name}}
                                                             </option>
                                                         @endforeach
@@ -71,8 +71,8 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="form-material">
-                                                    <input class="form-control" type="text" name="order-id">
-                                                    <label for="register5-lastname">Order ID</label>
+                                                    <input class="form-control" type="text" name="reference-no">
+                                                    <label for="register5-lastname">Reference No.</label>
                                                 </div>
                                             </div>
                                         </div>

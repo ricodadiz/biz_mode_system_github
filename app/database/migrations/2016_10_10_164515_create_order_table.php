@@ -17,7 +17,7 @@ class CreateOrderTable extends Migration {
             $table->integer('company_id');
             $table->string('customer_name');
             $table->date('date_order');
-            $table->string('order_id');
+            $table->string('reference_no');
             $table->string('status');
             $table->string('payment_name');
             $table->string('terms');

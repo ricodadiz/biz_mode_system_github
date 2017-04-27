@@ -18,7 +18,8 @@ class OrderAppController extends BaseController {
 		public function view_order($id,$order_id)
 		{
 			//dd($order_id);
-			$name 		= OrdersGeneric::where('order_id',$order_id)->first()->customer_name;
+			$name 		= OrdersGeneric::where('id',$order_id)->first()->customer_name;
+
 			// $vat_type 	= OrdersGeneric::where('order_id',$order_id)->first()->vat;
 			// $vat_value	= Vats::find($vat_type)->vat_value;
 			//dd($vat_value);
@@ -29,10 +30,17 @@ class OrderAppController extends BaseController {
 				'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 				'company' 		=> Companies::where('id',$id)->first(),
 				'user'			=> Confide::user(),
-				'products'		=> Products::where('id',$id)->get(),
-				'orders_product' => OrdersProduct::where('id',$order_id)->get(),
-				'orders_generic' => OrdersGeneric::where('order_id',$order_id)->get(),
-				// 'clients'		=> Clients::where('client_customer_name',$name)->first(),
+				'orders_generic' => OrdersGeneric::where('id',$order_id)->get(),
+				'orders_product' => OrdersProduct::where('order_id',$order_id)->get(),
+				'ref_no'		=> OrdersGeneric::where('id',$order_id)->first()->reference_no,
+				'clients'		=> Clients::where('client_customer_name',$name)->first(),
+				'date_order'	=> OrdersGeneric::where('id',$order_id)->first()->date_order,
+				// 'company_name'	=> Clients::where('id')->get()->client_company_name,
+				// 'client_name'	=> Clients::where('id')->get()->client_customer_name,
+				// 'ship_address'	=> Clients::where('id')->get()->client_shipping_address,
+				// 'bill_address'	=> Clients::where('id')->get()->client_billing_address,
+				// 'contact_num'	=> Clients::where('id')->get()->client_contact_number,
+				// 'email'			=> Clients::where('id')->get()->client_email_address,
 				// // 'vat'			=> $vat_value/100,
 				// 'product_in_orders'	=> OrdersProduct::where('id',$id)->get(),
 			);
@@ -42,9 +50,7 @@ class OrderAppController extends BaseController {
 
 		public function invoice_order($id,$order_id)
 		{
-			$name 		= OrdersGeneric::where('order_id',$order_id)->first()->recipient_name;
-			$vat_type 	= OrdersGeneric::where('order_id',$order_id)->first()->vat;
-			$vat_value	= Vats::find($vat_type)->vat_value;
+			$name 		= OrdersGeneric::where('id',$order_id)->first()->customer_name;
 			//dd($vat_value);
 			//dd($name);
 			$datatopass  = array(
@@ -53,11 +59,9 @@ class OrderAppController extends BaseController {
 				'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 				'company' 		=> Companies::where('id',$id)->first(),
 				'user'			=> Confide::user(),
-				'products'		=> Products::where('company_id',$id)->get(),
-				'order'			=> OrdersGeneric::where('order_id',$order_id)->first(),
-				'clients'		=> Clients::where('client_name',$name)->first(),
-				'vat'			=> $vat_value/100,
-				'product_in_orders'	=> OrdersProduct::where('order_id',$order_id)->get()
+				'clients'		=> Clients::where('client_customer_name',$name)->first(),
+				'orders_generic' => OrdersGeneric::where('id',$order_id)->get(),
+				'orders_product' => OrdersProduct::where('order_id',$order_id)->get(),
 			);
 			return View::make('operations.sales.order.invoice_order',$datatopass);
 		}
@@ -65,12 +69,12 @@ class OrderAppController extends BaseController {
 		public function order_list_generic($id)
 		{
 			$datatopass  = array(
-				'title' 		=> "Generic Order List - Beezmode",
-				'page_label'	=> "Generic Order List",
+				'title' 		=> "Product Order List - Beezmode",
+				'page_label'	=> "Product Order List",
 				'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 				'company' 		=> Companies::where('id',$id)->first(),
 				'user'			=> Confide::user(),
-				'orders'		=> OrdersGeneric::where('company_id',$id)->get(),
+				'orders_generic'=> OrdersGeneric::where('company_id',$id)->get(),
 				'orders_count'  => OrdersGeneric::where('company_id',$id)->count(),
 				'products'		=> Products::where('company_id',$id)->get(),
 			);
@@ -103,10 +107,10 @@ class OrderAppController extends BaseController {
 		public function add_order($id)
 		{
 
-			$form_data = Session::flash('add_order_form_data', Input::all());
+			// $form_data = Session::flash('add_order_form_data', Input::all());
+			$reference_no = Input::get("reference-no");
 			$customer_name = Input::get("customer-name");
 			$order_date = Input::get("order-date");
-			$order_id = Input::get("order-id");
 			$order_products = Input::get("product-name");
 			$order_warehouse = Input::get("order-warehouse");
 			$order_category = Input::get("order-category");
@@ -126,38 +130,16 @@ class OrderAppController extends BaseController {
 			    array(
 			        'customer-name' 			=> $customer_name,
 			        'order-date' 				=> $order_date,
-			        'order-id' 					=> $order_id,
-			        'order-products' 			=> $order_products,
-			        'order-warehouse' 			=> $order_warehouse,
-			        'order-category' 			=> $order_category,
-			      	'order-qty' 				=> $order_qty,
-			      	'order-price'				=> $order_price,
-			      	'order-vat'					=> $order_vat,
-			      	'order-amount'				=> $order_amount,
-			      	'order-status'				=> $order_status,
-			      	'order-terms'				=> $order_terms,
-			      	'payment-name'				=> $payment_name,
-			      	'order-due_date'			=> $order_due_date,
+			        'reference-no' 				=> $reference_no,
 			      	'order-amount-paid'			=> $order_amount_paid,
 			      	'order-total-amount'		=> $order_total_amount,
 			    	),
 			    array(
 			    	'customer-name' 			=> 'required',
 			        'order-date' 				=> 'required',
-			        'order-id'					=> 'min:1',
-			        'order-products' 			=> 'array',
-			        'order-warehouse' 			=> 'array',
-			        'order-category' 			=> 'array',
-			      	'order-qty' 				=> 'array',
-			      	'order-price'				=> 'array',
-			      	'order-vat'					=> 'array',
-			      	'order-amount'				=> 'array',
-			      	'order-status'				=> 'min:1',
-			      	'order-terms'				=> 'min:1',
-			      	'payment-name'				=> 'min:1',
-			      	'order-due_date'			=> 'min:1',
-			      	'order-amount-paid'			=> 'min:1',
-			      	'order-total-amount'		=> 'min:1',
+			        'reference-no'				=> 'max:4|regex:/^[(0-9a-zA-Z\s)]+$/u',
+			      	'order-amount-paid'			=> 'regex:/^[(0-9a-zA-Z\s)]+$/u',
+			      	'order-total-amount'		=> 'regex:/^[(0-9a-zA-Z\s)]+$/u',
 			         )
 		       
 			);
@@ -167,24 +149,25 @@ class OrderAppController extends BaseController {
 				
 				$new_order = new OrdersGeneric;
 				$new_order->company_id 		= $id;
-				$new_order->customer_name 	= $customer_name;
+				$new_order->customer_name 	= Clients::find($customer_name)->client_customer_name;
 				$new_order->date_order 		= $order_date;
-				$new_order->order_id 		= $order_id;
+				// $new_order->customer_name 	= $customer_name; 
+				$new_order->reference_no	= $reference_no;
 				$new_order->status			= $order_status;
 				$new_order->terms 			= $order_terms;
 				$new_order->payment_name	= $payment_name;
 				$new_order->due_date 		= $order_due_date;
 				$new_order->amount_paid 	= $order_amount_paid;
 				$new_order->total_amount	= $order_total_amount;
+
 				$new_order->save();
 
 				$i = 0; //Iterator
 				foreach ($order_products as $op) {
 					$product_in_orders = new OrdersProduct;
-					$product_in_orders->product_order_id 	= $new_order->id;
-					$product_in_orders->product_id 			= $op;
-					// $product_in_orders->product_id 	= $op_value;
-					$product_in_orders->products			= $order_products[$i];
+					$product_in_orders->order_id			= $new_order->id;
+					$product_in_orders->products			= Products::find($order_products[$i])->product_name;
+					// $product_in_orders->products			= $order_products[$i]; 
 					$product_in_orders->warehouse 			= $order_warehouse[$i];
 					$product_in_orders->category			= $order_category[$i];
 					$product_in_orders->quantity 			= $order_qty[$i];
