@@ -97,7 +97,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-primary">
-                                                    <input class="form-control" type="number" step="0.05" id="price-product" name="client-contact">
+                                                    <input class="form-control" type="text" id="price-product" name="client-contact">
                                                     <label for="product-price">Contact Number</label>
                                                 </div>
                                             </div>
