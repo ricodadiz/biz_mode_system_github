@@ -1,9 +1,7 @@
 <?php
 
-class Service extends Eloquent {
+class ExpensesServices extends Eloquent {
 	use SoftDeletingTrait;
 	
     protected $dates = ['deleted_at'];
-
-    				
 }

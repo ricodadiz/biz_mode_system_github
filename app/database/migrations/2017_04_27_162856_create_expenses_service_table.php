@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSparepartTable extends Migration {
+class CreateExpensesServiceTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,18 @@ class CreateSparepartTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('spareparts', function ($table) {
+		Schema::create('expenses_services', function ($table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->string('date');
-            $table->string('account_name');
-            $table->string('product');
-            $table->string('amount');
+            $table->date('service_date');
+            $table->string('sr_no');
+            $table->string('station_location');
+            $table->string('address');
+            $table->string('service_by');
+            $table->string('work_details');
+            $table->string('remarks_result');
+            $table->string('item');
+            $table->string('unit_cost');
             $table->string('qty');
             $table->string('total');
             $table->softDeletes();

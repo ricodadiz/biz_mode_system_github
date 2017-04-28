@@ -1,6 +1,6 @@
 <?php
 
-class Spareparts extends Eloquent {
+class Expenses extends Eloquent {
 	use SoftDeletingTrait;
 	
     protected $dates = ['deleted_at'];

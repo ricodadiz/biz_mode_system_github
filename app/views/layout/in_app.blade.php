@@ -339,7 +339,7 @@
                                 @endif
                                 <li>
                                 @if($user->can('view_warehouse'))
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-building"></i><span class="sidebar-mini-hide">Warehouse</span></a> @endif
+                                    <a class="nav-submenu" data-toggle="nav-submenu"><i class="fa fa-building"></i><span class="sidebar-mini-hide">Warehouse</span></a> @endif
                                     <ul>
                                         <li>
                                             <a href="{{URL::to('warehouse/'.$company->id.'/manage_warehouse')}}">Warehouse Setup</a>
@@ -391,7 +391,7 @@
                                         </ul>
                                         </li> -->
                                         <li>
-                                            <a class="nav-submenu" data-toggle="nav-submenu" href="#">Inventory</a>
+                                            <a class="nav-submenu" data-toggle="nav-submenu">Inventory</a>
                                             <ul>
                                                 {{-- <li>
                                                     <a href="{{URL::to('warehouse/'.$company->id.'/inventory_summary')}}">Inventory Summary</a>
@@ -426,7 +426,7 @@
                                 </li>
                                 <li>
                                     @if($user->can('view_sales'))
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-credit-card-alt"></i><span class="sidebar-mini-hide">Sales</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu"><i class="fa fa-credit-card-alt"></i><span class="sidebar-mini-hide">Sales</span></a>
                                     @endif
                                     <ul>
 
@@ -459,7 +459,7 @@
                                         </li>
                                         <li>
                                         @if($user->can('view_order'))
-                                        <a class="nav-submenu" data-toggle="nav-submenu" href="#">Product Order</a>
+                                        <a class="nav-submenu" data-toggle="nav-submenu">Product Order</a>
                                         <ul>
                                             @endif
                                                 <!-- <li>
@@ -494,22 +494,39 @@
  -->
                                         <li>
                                             @if($user->can('view_service'))
-                                            <a class="nav-submenu" data-toggle="nav-submenu" href="#">Service Order</a> 
+                                            <a class="nav-submenu" data-toggle="nav-submenu">Service Order</a> 
                                             @endif
                                             <ul>
                                                 @if($user->can('view_service'))
                                                 <li>
-                                                    <a class="nav-submenu" data-toggle="nav-submenu" href="{{URL::to('sales/'.$company->id.'/service_list')}}">Services</a>
+                                                    <a class="nav-submenu" data-toggle="nav-submenu" >Services</a>
                                                    <ul>
                                                     @endif
                                                         @if($user->can('view_service'))
                                                         <li>
-                                                            <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">Spare Parts</a>
+                                                            <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">Service</a>
                                                         </li>
                                                         @endif
                                                         @if($user->can('view_service'))
                                                         <li>
                                                             <a href="{{URL::to('sales/'.$company->id.'/technician_allowance')}}">Technician Allowance</a>
+                                                        </li>
+                                                        @endif
+                                                    </ul> 
+                                                </li>
+                                                @if($user->can('view_service'))
+                                                <li>
+                                                    <a class="nav-submenu" data-toggle="nav-submenu">Expenses</a>
+                                                   <ul>
+                                                    @endif
+                                                        @if($user->can('view_service'))
+                                                        <li>
+                                                            <a href="{{URL::to('sales/'.$company->id.'/expense_service_list')}}">Service</a>
+                                                        </li>
+                                                        @endif
+                                                        @if($user->can('view_service'))
+                                                        <li>
+                                                            <a href="{{URL::to('sales/'.$company->id.'/expense_technician')}}">Technician Allowance</a>
                                                         </li>
                                                         @endif
                                                     </ul> 
