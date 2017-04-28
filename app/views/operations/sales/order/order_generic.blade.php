@@ -18,7 +18,7 @@
                             <div class="col-xs-6 col-sm-4">
                                 <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                     <div class="block-content block-content-full">
-                                        <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
+                                        <div class="h1 font-w700" data-toggle="countTo" data-to="{{$orders_count}}"></div>
                                     </div>
                                     <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Product Order</div>
                                 </a>

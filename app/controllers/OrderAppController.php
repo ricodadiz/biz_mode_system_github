@@ -100,6 +100,7 @@ class OrderAppController extends BaseController {
 				'instock_count' => Products::where('company_id',$id)->sum('in_stock'),
 				'clients'		=> Clients::where('company_id',$id)->get(),
 				'in_stock' 		=> Products::where('in_stock','>',0) ->get(),
+				'orders_count'  => OrdersGeneric::where('company_id',$id)->count(),
 			);
 			return View::make('operations.sales.order.order_generic',$datatopass);
 		}
