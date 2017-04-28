@@ -324,9 +324,6 @@ class OrderAppController extends BaseController {
 				return Redirect::to(URL::previous())->with('add_error',$validator->messages());
 			}
 
-
-
-
 		}
 
 		public function delete_order($id,$order_id)
