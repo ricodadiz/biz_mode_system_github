@@ -19,7 +19,7 @@
                                         <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
                                     </li> --}}
                                     <li>
-                                        <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">
+                                        <a href="{{URL::to('sales/'.$company->id.'/expense_service_list')}}">
                                                 <button class="btn btn-default" type="button"><i class="fa fa-arrow-left"></i> Service List</button>
                                         </a> 
                                     </li>
@@ -27,20 +27,20 @@
                                 <h3 class="block-title">Add Services</h3>
                             </div>
                         <div class="block-content">
-                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_service_report')}}" method="post">
+                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/update_expense_service/'.$expenses->id)}}" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Service Date</label>
-                                                <input class="form-control input-lg" type="date" id="service_date" name="service_date">
+                                                <input class="form-control input-lg" type="date" id="service_date" name="service_date" value="{{$expenses->service_date}}">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">SR. No.</label>
-                                                <input class="form-control input-lg" type="number" id="sr_no" name="sr_no" placeholder="Enter Ref. No.">
+                                                <input class="form-control input-lg" type="number" id="sr_no" name="sr_no" value="{{$expenses->sr_no}}">
                                               </div>
                                             </div>
                                         </div>
@@ -50,13 +50,13 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-firstname">Station/Location</label>
-                                                <input class="form-control input-lg" type="text" id="station_location" name="station_location" placeholder="Enter Account Name">
+                                                <input class="form-control input-lg" type="text" id="station_location" name="station_location" value="{{$expenses->station_location}}">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Address</label>
-                                                <input class="form-control input-lg" type="text" id="address" name="address" placeholder="Enter Address">
+                                                <input class="form-control input-lg" type="text" id="address" name="address" value="{{$expenses->address}}">
                                               </div>
                                             </div>
                                         </div>
@@ -68,12 +68,12 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Service By</label>
-                                                <input class="form-control input-lg" type="text" id="service_by" name="service_by" placeholder="Service By">
+                                                <input class="form-control input-lg" type="text" id="service_by" name="service_by" value="{{$expenses->service_by}}">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                <textarea class="form-control" id="work_details" name="work_details" rows="2" placeholder="Enter Work Details"></textarea>
+                                                <textarea class="form-control" id="work_details" name="work_details" rows="2">{{$expenses->work_details}}</textarea>
                                                 <label for="material-textarea-small">Work Details</label>
                                               </div>
                                             </div>
@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                <textarea class="form-control" id="remarks_result" name="remarks_result" rows="2" placeholder="Enter Work Details"></textarea>
+                                                <textarea class="form-control" id="remarks_result" name="remarks_result" rows="2">{{$expenses->remarks_result}}</textarea>
                                                 <label for="material-textarea-small">Remarks/Result</label>
                                               </div>
                                             </div>
@@ -99,10 +99,14 @@
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                    <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one..">
+                                                <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one..">
                                                         <option selected disabled>Select Item</option>
                                                         @foreach($product as $p)
-                                                            <option value="{{$p->product_name}}">{{$p->product_name}}</option>
+                                                            @if($expenses->item == $p->product_name)
+                                                            <option value="{{$p->product_name}}" selected>{{$p->product_name}}</option>
+                                                            @else
+                                                                <option value="{{$p->product_name}}">{{$p->product_name}}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                     <label for="example2-select2">Item</label>
@@ -111,7 +115,7 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Unit Cost</label>
-                                                <input class="form-control input-lg" type="number" id="unit_cost" name="unit_cost" placeholder="Enter Unit Cost">
+                                                <input class="form-control input-lg" type="number" id="unit_cost" name="unit_cost" value="{{$expenses->unit_cost}}">
                                               </div>
                                             </div>
                                         </div>
@@ -121,13 +125,13 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-firstname">Quantity</label>
-                                                <input class="form-control input-lg" type="number" id="qty" name="qty" placeholder="Enter Quantity">
+                                                <input class="form-control input-lg" type="number" id="qty" name="qty" value="{{$expenses->qty}}">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                <label for="mega-lastname">Service Charge</label>
-                                                <input class="form-control input-lg" type="number" id="service_charge" name="service_charge" placeholder="Enter Service Charge">
+                                                <label for="mega-lastname">Total</label>
+                                                    <input class="form-control input-lg" type="number" id="total" name="total" value="{{$expenses->total}}">
                                               </div>
                                             </div>
                                         </div>
@@ -136,12 +140,6 @@
                                 <div class="row">
                                   <div class="col-sm-6">
                                     <div class="form-group">
-                                        <div class="col-xs-6">
-                                            <div class="form-material">
-                                                    <label for="mega-lastname">Total</label>
-                                                    <input class="form-control input-lg" type="number" id="total" name="total">
-                                            </div>
-                                        </div>
                                         <div class="col-xs-6">
                                             <div class="form-material">
                                             <button class="btn btn-warning" type="submit"><i class="fa fa-check push-5-r"></i>Save</button>
@@ -153,12 +151,4 @@
                             </form>
                         </div>
                     </div>
-
-
-    <script>
-        jQuery(function () {
-            // Init page helpers (Appear + CountTo plugins)
-            App.initHelpers(['appear', 'appear-countTo']);
-        });
-    </script>
 @stop

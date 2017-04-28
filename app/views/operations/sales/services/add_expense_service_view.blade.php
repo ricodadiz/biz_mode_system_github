@@ -19,7 +19,7 @@
                                         <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
                                     </li> --}}
                                     <li>
-                                        <a href="{{URL::to('sales/'.$company->id.'/service_list')}}">
+                                        <a href="{{URL::to('sales/'.$company->id.'/expense_service_list')}}">
                                                 <button class="btn btn-default" type="button"><i class="fa fa-arrow-left"></i> Service List</button>
                                         </a> 
                                     </li>
@@ -27,7 +27,7 @@
                                 <h3 class="block-title">Add Services</h3>
                             </div>
                         <div class="block-content">
-                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_service_report')}}" method="post">
+                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_expense_service')}}" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -126,8 +126,8 @@
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                <label for="mega-lastname">Service Charge</label>
-                                                <input class="form-control input-lg" type="number" id="service_charge" name="service_charge" placeholder="Enter Service Charge">
+                                                <label for="mega-lastname">Total</label>
+                                                <input class="form-control input-lg" type="number" id="total" name="total" >
                                               </div>
                                             </div>
                                         </div>
@@ -136,12 +136,6 @@
                                 <div class="row">
                                   <div class="col-sm-6">
                                     <div class="form-group">
-                                        <div class="col-xs-6">
-                                            <div class="form-material">
-                                                    <label for="mega-lastname">Total</label>
-                                                    <input class="form-control input-lg" type="number" id="total" name="total">
-                                            </div>
-                                        </div>
                                         <div class="col-xs-6">
                                             <div class="form-material">
                                             <button class="btn btn-warning" type="submit"><i class="fa fa-check push-5-r"></i>Save</button>
