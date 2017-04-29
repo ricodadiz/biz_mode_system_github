@@ -532,19 +532,19 @@
                             <h3 class="h5 font-w600 text-uppercase push-20">Company</h3>
                             <ul class="list list-simple-mini font-s13">
                                 <li>
-                                    <a class="font-w600" href="frontend_home.html">Home</a>
+                                    <a class="font-w600" href="{{URL::to('/')}}">Home</a>
                                 </li>
                                 <li>
-                                    <a class="font-w600" href="/features">Features</a>
+                                    <a class="font-w600" href="{{URL::to('/features')}}">Features</a>
                                 </li>
                                 <li>
-                                    <a class="font-w600" href="/pricing">Pricing</a>
+                                    <a class="font-w600" href="{{URL::to('/pricing')}}">Pricing</a>
                                 </li>
 {{--                                 <li>
                                     <a class="font-w600" href="frontend_about.html">About Us</a>
                                 </li> --}}
                                 <li>
-                                    <a class="font-w600" href="/contact">Contact Us</a>
+                                    <a class="font-w600" href="{{URL::to('/contact')}}">Contact Us</a>
                                 </li>
                             </ul>
                         </div>

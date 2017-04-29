@@ -102,7 +102,7 @@
                                     </li>
                                 </ul> -->
                             </div>
-                            <a class="h5 text-white" href="/">
+                            <a class="h5 text-white" href="{{URL::to('/')}}">
                                <img src="{{asset('img/logotrans2.png')}}" style="width:10%;"> <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 sidebar-mini-hide">eezMode</span>
                             </a>
                         </div>
@@ -112,7 +112,7 @@
                         <div class="side-content">
                             <ul class="nav-main">
                                 <li class="open">
-                                    <a href="/"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
+                                    <a href="{{URL::to('/')}}"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <!-- 
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <ul>
@@ -127,19 +127,19 @@
                                     -->
                                 </li>
                                 <li>
-                                    <a href="/users/login"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
+                                    <a href="{{URL::to('/users/login')}}"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
                                 </li>
                                 <li>
-                                    <a href="/users/create"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
+                                    <a href="{{URL::to('/users/create')}}"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
                                 </li>
                                 <li>
-                                    <a href="/features"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
+                                    <a href="{{URL::to('/features')}}"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pricing"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
+                                    <a href="{{URL::to('/pricing')}}"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
                                 </li>
                                 <li>
-                                    <a href="/contact"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
+                                    <a href="{{URL::to('/contact')}}"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
                                 </li>
 <!--                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bag"></i><span class="sidebar-mini-hide">e-Commerce</span></a>
@@ -232,7 +232,7 @@
                     <!-- Header Navigation Left -->
                     <ul class="nav-header pull-left">
                         <li class="header-content">
-                            <a class="h5" href="frontend_home.html">
+                            <a class="h5" href="{{URL::to('/')}}">
                                 <img src="{{asset('img/logotrans2.png')}}" style="width:28px;">
                                 <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 text-white">eezMode</span>
                             </a>

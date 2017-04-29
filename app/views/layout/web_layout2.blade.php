@@ -134,7 +134,7 @@
                                 </li>
                                 @endif
                                 <li class="open">
-                                    <a href="/"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
+                                    <a href="{{URL::to('/')}}"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <!-- 
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <ul>
@@ -166,13 +166,13 @@
 
                                 </li>
                                 <li>
-                                    <a href="/features"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
+                                    <a href="{{URL::to('/features')}}"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pricing"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
+                                    <a href="{{URL::to('/pricing')}}"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
                                 </li>
                                 <li>
-                                    <a href="/contact"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
+                                    <a href="{{URL::to('/contact')}}"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
                                 </li>
 <!--                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bag"></i><span class="sidebar-mini-hide">e-Commerce</span></a>
@@ -265,7 +265,7 @@
                     <!-- Header Navigation Left -->
                     <ul class="nav-header pull-left">
                         <li class="header-content">
-                            <a class="h5" href="frontend_home.html">
+                            <a class="h5" href="{{URL::to('/')}}">
                                 <img src="{{asset('img/logotrans2.png')}}" style="width:28px;">
                                 <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 text-white">eezMode</span>
                             </a>
@@ -289,19 +289,19 @@
                             <h3 class="h5 font-w600 text-uppercase push-20">Beezmode Solutions</h3>
                             <ul class="list list-simple-mini font-s13">
                                 <li>
-                                    <a class="font-w600" href="/">Home</a>
+                                    <a class="font-w600" href="{{URL::to('/')}}">Home</a>
                                 </li>
                                 <li>
-                                    <a class="font-w600" href="/features">Features</a>
+                                    <a class="font-w600" href="{{URL::to('/features')}}">Features</a>
                                 </li>
                                 <li>
-                                    <a class="font-w600" href="/pricing">Pricing</a>
+                                    <a class="font-w600" href="{{URL::to('/pricing')}}">Pricing</a>
                                 </li>
                                 {{-- <li>
                                     <a class="font-w600" href="frontend_about.html">About Us</a>
                                 </li> --}}
                                 <li>
-                                    <a class="font-w600" href="/contact">Contact Us</a>
+                                    <a class="font-w600" href="{{URL::to('/contact')}}">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -312,7 +312,7 @@
                                     <a class="font-w600" href="/users/login">Log In</a>
                                 </li>
                                 <li>
-                                    <a class="font-w600" href="/users/register">Register</a>
+                                    <a class="font-w600" href="/users/create">Register</a>
                                 </li>
                                {{--  <li>
                                     <a class="font-w600" href="frontend_support.html">Support Center</a>
