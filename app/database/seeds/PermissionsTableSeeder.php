@@ -322,7 +322,7 @@ class PermissionsTableSeeder extends Seeder {
 		$view_accounting->save();
 
 		$view_trasaction_list = new Permission;
-		$view_trasaction_list->name = 'view_trasaction_list';
+		$view_trasaction_list->name = 'view_transaction_list';
 		$view_trasaction_list->display_name = 'View Transaction List';
 		$view_trasaction_list->save();
 

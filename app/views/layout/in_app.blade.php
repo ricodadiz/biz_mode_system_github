@@ -341,9 +341,7 @@
                                 @if($user->can('view_warehouse'))
                                     <a class="nav-submenu" data-toggle="nav-submenu"><i class="fa fa-building"></i><span class="sidebar-mini-hide">Warehouse</span></a> @endif
                                     <ul>
-                                        <li>
-                                            <a href="{{URL::to('warehouse/'.$company->id.'/manage_warehouse')}}">Warehouse Setup</a>
-                                        </li>                                    
+                                                                    
 <!--                                         <li>
                                             <a href="{{URL::to('warehouse/'.$company->id.'/warehouse_summary')}}">Warehouse Summary</a>
                                         </li> -->
@@ -435,12 +433,7 @@
                                             <a href="{{URL::to('pos_sales/'.$company->id)}}">Sales Summary</a>
                                         </li>
                                         @endif
-                                     
-                                        @if($user->can('view_sales_setup'))
-                                        <li>
-                                         <a href="{{URL::to('sales/'.$company->id.'/sales_settings')}}">Sales Setup</a>
-                                        </li>
-                                        @endif
+                                    
                                         <li>
                                             @if($user->can('view_client'))
                                             <a href="{{URL::to('sales/'.$company->id.'/client_list')}}">Client List</a>
@@ -553,7 +546,7 @@
                                         @endif
                                         @if($user->can('view_accounts_list'))
                                         <li>
-                                            <a href="{{URL::to('accounting/'.$company->id.'/accounts_list')}}">Accounts</a>
+                                            <a href="{{URL::to('accounting/'.$company->id.'/accounts_list')}}">Chart of Accounts</a>
                                         </li>
                                         @endif
                                         @if($user->can('view_journal'))
@@ -563,7 +556,7 @@
                                         @endif
                                         @if($user->can('view_balances'))
                                         <li>
-                                            <a href="{{URL::to('accounting/'.$company->id.'/balance_list')}}">Starting Balances</a>
+                                            <a href="{{URL::to('accounting/'.$company->id.'/balance_list')}}">Balances</a>
                                         </li>
                                         @endif
                                     </ul>                                   
@@ -608,6 +601,32 @@
                                         </li>                           
                                     </ul>
                                 </li> --> @endif
+                                @if($user->can('view_roles')  || $user->hasRole('Owner'))
+
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-settings"></i><span class="sidebar-mini-hide">Setup</span></a>
+                                    <ul>
+                                        @if($user->can('view_sales_setup'))
+                                        <li>
+                                         <a href="{{URL::to('sales/'.$company->id.'/sales_settings')}}">Sales Setup</a>
+                                        </li>
+                                        @endif
+
+                                        <li>
+                                            <a href="{{URL::to('warehouse/'.$company->id.'/manage_warehouse')}}">Warehouse Setup</a>
+                                        </li>        
+
+                                        <li>
+                                            <a href="{{URL::to('sales/'.$company->id.'/add_client_view')}}">Client Setup</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{URL::to('warehouse/'.$company->id.'/add_product_view')}}">Product Setup</a>
+                                        </li>            
+                                    </ul>
+                                </li>
+                                @endif
+
 
                                 @if($user->can('view_roles')  || $user->hasRole('Owner'))
 

@@ -832,7 +832,8 @@ class SalesController extends Controller {
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
 			'services' 		=> Service::where('company_id',$id)->get(),
-			'services_count' => Service::where('company_id',$id)->count()
+			'services_count' => Service::where('company_id',$id)->count(),
+			'services_total' => Service::where('company_id',$id)->sum('total'),
 		);
 		return View::make('operations.sales.services.service_list',$datatopass);
 	}
@@ -852,14 +853,14 @@ class SalesController extends Controller {
 	}
 
 		public function add_service($id)
-	{
+		{
 		$datatopass  = array(
 			'title' 		=> "Service(Out of Warranty) - Beezmode",
 			'page_label'	=> "Service(Out of Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
-			'product'		=> Products::where('company_id',$id)->get(),
+			'product'		=> Products::all(),
 
 		);
 		return View::make('operations.sales.services.add_service',$datatopass);
@@ -1146,7 +1147,7 @@ class SalesController extends Controller {
 				$add_service_list->service_by		=$service_by;
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
-				$add_service_list->item				=$item;
+				$add_service_list->item				=Products::find($item)->product_name;
 				$add_service_list->unit_cost		=$unit_cost;
 				$add_service_list->qty				=$qty;
 				$add_service_list->service_charge	=$service_charge;

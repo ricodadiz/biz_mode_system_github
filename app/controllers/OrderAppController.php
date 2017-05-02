@@ -119,6 +119,8 @@ class OrderAppController extends BaseController {
 			$order_price = Input::get("order-price");
 			$order_vat = Input::get("order-vat");
 			$order_amount = Input::get("order-amount");
+			$order_warranty = Input::get("order-warranty");
+			$order_warranty_date = Input::get("order-warranty-date");
 			$order_status = Input::get("order-status");
 			$payment_name = Input::get("payment-name");
 			$order_terms = Input::get("order-terms");
@@ -134,6 +136,7 @@ class OrderAppController extends BaseController {
 			        'reference-no' 				=> $reference_no,
 			      	'order-amount-paid'			=> $order_amount_paid,
 			      	'order-total-amount'		=> $order_total_amount,
+			      	'order-warranty-date'		=> $order_warranty_date,
 			    	),
 			    array(
 			    	'customer-name' 			=> 'required',
@@ -141,6 +144,7 @@ class OrderAppController extends BaseController {
 			        'reference-no'				=> 'max:4|regex:/^[(0-9a-zA-Z\s)]+$/u',
 			      	'order-amount-paid'			=> 'regex:/^[(0-9a-zA-Z\s)]+$/u',
 			      	'order-total-amount'		=> 'regex:/^[(0-9a-zA-Z\s)]+$/u',
+			      	'order-warranty-date'		=> 'required',
 			         )
 		       
 			);
@@ -175,10 +179,13 @@ class OrderAppController extends BaseController {
 					$product_in_orders->price				= $order_price[$i];
 					$product_in_orders->vat					= $order_vat[$i];
 					$product_in_orders->amount				= $order_amount[$i];
+					$product_in_orders->order_product_warranty	= $order_warranty[$i];
+					$product_in_orders->order_product_warranty_date	= $order_warranty_date[$i];
 					$product_in_orders->save();
-				// $reduce_quantity = Products::find($op_value);
-				// $reduce_quantity->in_stock -= $order_qty[$op_key];
-				// $reduce_quantity->save();
+
+					$reduce_quantity = Products::find($op);
+					$reduce_quantity->in_stock -= $order_qty[$i];
+					$reduce_quantity->save();
 					$i++;
 				}
 

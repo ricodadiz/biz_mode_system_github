@@ -99,10 +99,10 @@
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                    <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one..">
+                                                    <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one.." onchange="item_listener(0)">
                                                         <option selected disabled>Select Item</option>
                                                         @foreach($product as $p)
-                                                            <option value="{{$p->product_name}}">{{$p->product_name}}</option>
+                                                            <option value="{{$p->id}}">{{$p->product_name}}</option>
                                                         @endforeach
                                                     </select>
                                                     <label for="example2-select2">Item</label>
@@ -121,13 +121,13 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-firstname">Quantity</label>
-                                                <input class="form-control input-lg" type="number" id="qty" name="qty" placeholder="Enter Quantity">
+                                                <input class="form-control input-lg" type="number" id="qty" name="qty" placeholder="Enter Quantity" >
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Service Charge</label>
-                                                <input class="form-control input-lg" type="number" id="service_charge" name="service_charge" placeholder="Enter Service Charge">
+                                                <input class="form-control input-lg" type="number" id="service_charge" name="service_charge" placeholder="Enter Service Charge" onkeypress="ServiceCost(0)">
                                               </div>
                                             </div>
                                         </div>
@@ -160,5 +160,36 @@
             // Init page helpers (Appear + CountTo plugins)
             App.initHelpers(['appear', 'appear-countTo']);
         });
+
+        var json = {{json_encode($product)}};
+
+        var item_listener = function(id){
+            //console.log(1);
+            $(this).change(function(event) {
+                $.each(json, function(index, val) {
+                    if($('#item').val() == val.id)
+                    {
+                        $('#unit_cost').val(val.product_price);
+                    }
+                });
+                // console.log($('#product-name-'+id).val());
+            });
+        };
+
+        var ServiceCost = function(id)
+            {
+                $(this).change(function(event) {
+                    total = 0;
+
+                    $('#qty').each(function() {
+                         num1= ($(this).val() * $('#unit_cost').val());
+                         num2 = parseInt($('#service_charge').val());
+                         total = ((num1) + (num2));
+                         $('#total').val(total);
+                    });
+                });
+        }
+
+
     </script>
 @stop

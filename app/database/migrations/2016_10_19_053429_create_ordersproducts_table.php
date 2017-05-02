@@ -22,6 +22,8 @@ class CreateOrdersproductsTable extends Migration {
             $table->string('price');
             $table->string('vat');
             $table->string('amount');
+            $table->string('order_product_warranty');
+            $table->string('order_product_warranty_date');
         	$table->softDeletes();
             $table->timestamps();
         });	
