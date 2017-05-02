@@ -158,10 +158,10 @@
                                 </li>
                                 <li>
                                     @if(Confide::user())
-                                    <a href="users/create" style="display:none;"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
+                                    <a href="{{URL::to('users/create')}}" style="display:none;"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
                                     @endif
                                     @if(!Confide::user())
-                                    <a href="users/create"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
+                                    <a href="{{URL::to('users/create')}}"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
                                     @endif
 
                                 </li>

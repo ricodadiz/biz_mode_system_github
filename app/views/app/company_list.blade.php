@@ -100,7 +100,7 @@
                                     </li>
                                 </ul> -->
                             </div>
-                            <a class="h5 text-white" href="/">
+                            <a class="h5 text-white" href="{{URL::to('/')}}">
                                <img src="{{asset('img/logotrans2.png')}}" style="width:10%;"> <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 sidebar-mini-hide">eezMode</span>
                             </a>
                         </div>
@@ -131,16 +131,16 @@
                                     -->
                                 </li>
                                 <li>
-                                    <a href="users/logout"><i class="si si-logout"></i><span class="sidebar-mini-hide">Logout</span></a>
+                                    <a href="{{URL::to('users/logout')}}"><i class="si si-logout"></i><span class="sidebar-mini-hide">Logout</span></a>
                                 </li>
                                 <li>
-                                    <a href="features"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
+                                    <a href="{{URL::to('features')}}"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
                                 </li>
                                 <li>
-                                    <a href="pricing"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
+                                    <a href="{{URL::to('pricing')}}"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
                                 </li>
                                 <li>
-                                    <a href="contact"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
+                                    <a href="{{URL::to('contact')}}"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
                                 </li>
 <!--                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bag"></i><span class="sidebar-mini-hide">e-Commerce</span></a>
