@@ -127,7 +127,12 @@
                                     -->
                                 </li>
                                 <li>
-                                    <a href="{{URL::to('/users/login')}}"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
+                                    @if(Confide::user())
+                                        <a href="{{URL::to('users/logout')}}"><i class="si si-logout"></i><span class="sidebar-mini-hide">Logout</span></a>
+                                    @endif
+                                    @if(!Confide::user())
+                                    <a href="{{URL::to('users/login')}}"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
+                                    @endif
                                 </li>
                                 <li>
                                     <a href="{{URL::to('/users/create')}}"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>

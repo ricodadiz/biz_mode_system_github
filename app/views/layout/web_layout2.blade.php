@@ -118,7 +118,7 @@
                                     </li>
                                 </ul> -->
                             </div>
-                            <a class="h5 text-white" href="/">
+                            <a class="h5 text-white" href="{{URL::to('/')}}">
                                <img src="{{asset('img/logotrans2.png')}}" style="width:10%;"> <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 sidebar-mini-hide">eezMode</span>
                             </a>
                         </div>

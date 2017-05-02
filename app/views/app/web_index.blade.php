@@ -124,7 +124,7 @@
                                     </li>
                                 </ul> -->
                             </div>
-                            <a class="h5 text-white" href="/">
+                            <a class="h5 text-white" href="{{URL::to('/')}}">
                                <img src="{{asset('img/logotrans2.png')}}" style="width:10%;"> <!-- <i class="fa fa-circle-o-notch text-primary"></i> --> <span class="h4 font-w600 sidebar-mini-hide">eezMode</span>
                             </a>
                         </div>
@@ -140,7 +140,7 @@
                                 </li>
                                 @endif
                                 <li class="open">
-                                    <a href="/"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
+                                    <a href="{{URL::to('/')}}"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <!-- 
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-home"></i><span class="sidebar-mini-hide">Home</span></a>
                                     <ul>
@@ -159,25 +159,25 @@
                                         <a href="{{URL::to('users/logout')}}"><i class="si si-logout"></i><span class="sidebar-mini-hide">Logout</span></a>
                                     @endif
                                     @if(!Confide::user())
-                                    <a href="users/login"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
+                                    <a href="{{URL::to('users/login')}}"><i class="si si-pencil"></i><span class="sidebar-mini-hide">Login</span></a>
                                     @endif
                                 </li>
                                 <li>
                                     @if(Confide::user())
-                                    <a href="users/create" style="display:none;"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
+                                    <a href="{{URL::to('users/create')}}" style="display:none;"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
                                     @endif
                                     @if(!Confide::user())
-                                    <a href="users/create"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
+                                    <a href="{{URL::to('users/create')}}"><i class="si si-users"></i><span class="sidebar-mini-hide">Register</span></a>
                                     @endif
                                 </li>
                                 <li>
-                                    <a href="/features"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
+                                    <a href="{{URL::to('/features')}}"><i class="si si-energy"></i><span class="sidebar-mini-hide">Features</span></a>
                                 </li>
                                 <li>
-                                    <a href="/pricing"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
+                                    <a href="{{URL::to('/pricing')}}"><i class="si si-wallet"></i><span class="sidebar-mini-hide">Pricing</span></a>
                                 </li>
                                 <li>
-                                    <a href="/contact"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
+                                    <a href="{{URL::to('/contact')}}"><i class="si si-envelope-open"></i><span class="sidebar-mini-hide">Contact</span></a>
                                 </li>
 <!--                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bag"></i><span class="sidebar-mini-hide">e-Commerce</span></a>
@@ -551,11 +551,18 @@
                         <div class="col-sm-4">
                             <h3 class="h5 font-w600 text-uppercase push-20">Support</h3>
                             <ul class="list list-simple-mini font-s13">
+                                @if(Confide::user())
                                 <li>
-                                    <a class="font-w600" href="/users/login">Log In</a>
+                                    <a class="font-w600" href="{{URL::to('users/logout')}}">Log Out</a>
                                 </li>
+                                @endif
+                                @if(!Confide::user())
                                 <li>
-                                    <a class="font-w600" href="/users/create">Sign Up</a>
+                                    <a class="font-w600" href="{{URL::to('users/login')}}">Log In</a>
+                                </li>
+                                @endif
+                                <li>
+                                    <a class="font-w600" href="{{URL::to('users/create')}}">Sign Up</a>
                                 </li>
                                 {{-- <li>
                                     <a class="font-w600" href="frontend_support.html">Support Center</a>
