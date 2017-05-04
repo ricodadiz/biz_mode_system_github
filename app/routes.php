@@ -131,6 +131,11 @@ Route::post('sales/{id}/update_expense_service/{service_id}', array('before' => 
 Route::get('sales/{id}/add_expense_technician_view', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician_view'));
 Route::post('sales/{id}/add_expense_technician', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician'));
 
+Route::get('sales/{id}/invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@invoice'));
+Route::get('sales/{id}/cash_invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@cash_invoice'));
+Route::get('sales/{id}/official_receipt', array('before' => 'auth|view_service', 'uses' =>'SalesController@official_receipt'));
+Route::get('sales/{id}/provisional_receipt', array('before' => 'auth|view_service', 'uses' =>'SalesController@provisional_receipt'));
+
 // Route::get('sales/{id}/service_list_price', array('before' => 'auth', 'uses' =>'SalesController@service_list_price'));
 Route::get('sales/{id}/delivery_list', array('before' => 'auth|view_delivery', 'uses' =>'SalesController@delivery_list'));
 Route::get('sales/{id}/view_delivery_list/{delivery_list}', array('before' => 'auth|view_delivery', 'uses' =>'SalesController@view_delivery_list'));

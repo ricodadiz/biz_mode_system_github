@@ -1568,6 +1568,54 @@ class SalesController extends Controller {
 			}
 	}
 
+	public function invoice($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Invoice - Beezmode",
+			'page_label'	=> "Invoice",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+		);
+		return View::make('operations.sales.invoice.invoice',$datatopass);
+	}
+
+	public function cash_invoice($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Cash Invoice - Beezmode",
+			'page_label'	=> "",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+		);
+		return View::make('operations.sales.invoice.cash_invoice',$datatopass);
+	}
+	public function official_receipt($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Official Receipt - Beezmode",
+			'page_label'	=> "",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+		);
+		return View::make('operations.sales.invoice.official_receipt',$datatopass);
+	}
+	public function provisional_receipt($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Provisional Receipt - Beezmode",
+			'page_label'	=> "",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+		);
+		return View::make('operations.sales.invoice.provisional_receipt',$datatopass);
+	}
+
+
+
 	// public function prospect_clients($id)
 	// {
 	// 	$datatopass  = array(
