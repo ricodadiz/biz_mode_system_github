@@ -51,6 +51,7 @@
                                         <tr>
                                             <th class="text-left">Product Name</th>
                                             <th class="text-left">Warranty Status</th>
+                                            <th class="text-left">Warranty Period</th>
                                             <th class="text-left">ORDER DATE</th>
                                             <th class="text-left">Warehouse</th>
                                             <th class="text-right">Quantity</th>
@@ -73,6 +74,7 @@
                                         @else
                                             <td><strong class="label label-success">Under Warranty</strong></td>
                                         @endif
+                                            <td><strong>{{$op->order_product_warranty_date}}</strong></td>
                                             <td><strong>{{$date_order}}</strong></td>
                                             <td><strong>{{$op->warehouse}}</strong></td>
                                             <td class="text-right"><strong>{{$op->quantity}}</strong></td>
@@ -86,11 +88,11 @@
                                         
                                         @foreach($orders_generic as $og)                                           
                                         <tr>
-                                            <td colspan="6" class="text-right"><strong>Total Price:</strong></td>
+                                            <td colspan="7" class="text-right"><strong>Total Price:</strong></td>
                                             <td class="text-right"> <strong> {{$og->total_amount}} </strong> </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" class="text-right"><strong>Total Paid:</strong></td>
+                                            <td colspan="7" class="text-right"><strong>Total Paid:</strong></td>
                                             <td class="text-right"> <strong> {{$og->amount_paid}} </strong></td>
                                         
                                         @endforeach
@@ -100,13 +102,13 @@
                                         @if($og->amount_paid > $og->total_amount)
                                         <?php $change = $og->amount_paid - $og->total_amount ; ?>
                                         <tr class="success">
-                                            <td colspan="6" class="text-right text-uppercase"><strong>Change:</strong></td>
+                                            <td colspan="7" class="text-right text-uppercase"><strong>Change:</strong></td>
                                             <td class="text-right"><strong>{{$change}}</strong></td>
                                         </tr>
                                         @else
                                         <?php $debt = $og->amount_paid - $og->total_amount ; ?>
                                         <tr class="danger">
-                                            <td colspan="6" class="text-right text-uppercase"><strong>Balance: </strong></td>
+                                            <td colspan="7" class="text-right text-uppercase"><strong>Balance: </strong></td>
                                             <td class="text-right"><strong>{{$debt}}</strong></td>
                                         </tr>
                                         @endif

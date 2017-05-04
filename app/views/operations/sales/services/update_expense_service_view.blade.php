@@ -102,11 +102,7 @@
                                                 <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one..">
                                                         <option selected disabled>Select Item</option>
                                                         @foreach($product as $p)
-                                                            @if($expenses->item == $p->product_name)
-                                                            <option value="{{$p->product_name}}" selected>{{$p->product_name}}</option>
-                                                            @else
-                                                                <option value="{{$p->product_name}}">{{$p->product_name}}</option>
-                                                            @endif
+                                                            <option value="{{$p->id}}" selected>{{$p->product_name}}</option>
                                                         @endforeach
                                                     </select>
                                                     <label for="example2-select2">Item</label>
