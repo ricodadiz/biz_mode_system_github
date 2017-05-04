@@ -852,15 +852,21 @@ class SalesController extends Controller {
 		return View::make('operations.sales.services.new_service_list',$datatopass);
 	}
 
-		public function add_service($id)
+		public function add_service($id,$order_id)
 		{
-		$datatopass  = array(
-			'title' 		=> "Service(Out of Warranty) - Beezmode",
-			'page_label'	=> "Service(Out of Warranty)",
-			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
-			'company' 		=> Companies::where('id',$id)->first(),
-			'user'			=> Confide::user(),
-			'product'		=> Products::all(),
+			$name 		= OrdersGeneric::where('id',$order_id)->first()->customer_name;
+
+			$datatopass  = array(
+				'title' 		=> "Service(Out of Warranty) - Beezmode",
+				'page_label'	=> "Service(Out of Warranty)",
+				'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+				'company' 		=> Companies::where('id',$id)->first(),
+				'user'			=> Confide::user(),
+				'product'		=> Products::all(),
+				'order_service' => OrdersGeneric::where('company_id',$id)->where('id',$order_id)->first(),
+				'orders_generic' => OrdersGeneric::where('id',$order_id)->get(),
+				'orders_product' => OrdersProduct::where('order_id',$order_id)->get(),
+				'clients'		=> Clients::where('client_customer_name',$name)->first(),
 
 		);
 		return View::make('operations.sales.services.add_service',$datatopass);
@@ -1088,7 +1094,7 @@ class SalesController extends Controller {
 		return View::make('operations.sales.services.update_service',$datatopass);
 	}
 
-	public function add_service_report($id){
+	public function add_service_report($id,$order_id){
 
 			$service_date		 = strip_tags(Input::get("service_date"));
 			$sr_no	 			 = strip_tags(Input::get("sr_no"));
@@ -1147,12 +1153,17 @@ class SalesController extends Controller {
 				$add_service_list->service_by		=$service_by;
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
-				$add_service_list->item				=Products::find($item)->product_name;
+				$add_service_list->item				=$item;
 				$add_service_list->unit_cost		=$unit_cost;
 				$add_service_list->qty				=$qty;
 				$add_service_list->service_charge	=$service_charge;
 				$add_service_list->total			=$total;
 				$add_service_list->save();
+
+				$add_service_order = OrdersGeneric::find($order_id);
+				$add_service_order->service_id = $add_service_list->id;
+				$add_service_order->save();
+
 
 				$datatopass = array(
 					'message' => "Your Data Has Been Successfully Saved!",
@@ -1226,7 +1237,7 @@ class SalesController extends Controller {
 				$add_service_list->service_by		=$service_by;
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
-				$add_service_list->item				=$item;
+				$add_service_list->item				=Products::find($item)->product_name;
 				$add_service_list->unit_cost		=$unit_cost;
 				$add_service_list->qty				=$qty;
 				$add_service_list->service_charge	=$service_charge;
@@ -1283,20 +1294,27 @@ class SalesController extends Controller {
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
 			'expenses' 		=> ExpensesServices::where('company_id',$id)->get(),
-			'services_count'=> ExpensesServices::where('company_id',$id)->count()
+			'services_count'=> ExpensesServices::where('company_id',$id)->count(),
+			'services_total'=> ExpensesServices::where('company_id',$id)->sum('total'),
 		);
 		return View::make('operations.sales.services.expense_service_list',$datatopass);
 	}
 
-	public function add_expense_service_view($id)
+	public function add_expense_service_view($id,$order_id)
 	{
+		$name 		= OrdersGeneric::where('id',$order_id)->first()->customer_name;
+
 		$datatopass  = array(
 			'title' 		=> "Service(Under Warranty) - Beezmode",
 			'page_label'	=> "Service(Under Warranty)",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
-			'product'		=> Products::where('company_id',$id)->get(),
+			'product'		=> Products::all(),
+			'order_service' => OrdersGeneric::where('company_id',$id)->where('id',$order_id)->first(),
+			'orders_generic'=> OrdersGeneric::where('id',$order_id)->get(),
+			'orders_product'=> OrdersProduct::where('order_id',$order_id)->get(),
+			'clients'		=> Clients::where('client_customer_name',$name)->first(),
 		);
 		return View::make('operations.sales.services.add_expense_service_view',$datatopass);
 	}
@@ -1310,12 +1328,12 @@ class SalesController extends Controller {
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
 			'expenses' 		=> ExpensesServices::where('company_id',$id)->where('id',$service_id)->first(),
-			'product'		=> Products::where('company_id',$id)->get(),
+			'product'		=> Products::all(),
 		);
 		return View::make('operations.sales.services.update_expense_service_view',$datatopass);
 	}
 
-	public function add_expense_service($id){
+	public function add_expense_service($id,$order_id){
 
 			$service_date		 = strip_tags(Input::get("service_date"));
 			$sr_no	 			 = strip_tags(Input::get("sr_no"));
@@ -1376,6 +1394,11 @@ class SalesController extends Controller {
 				$add_service_list->qty				=$qty;
 				$add_service_list->total			=$total;
 				$add_service_list->save();
+
+				$add_service_order = OrdersGeneric::find($order_id);
+				$add_service_order->service_id = $add_service_list->id;
+				$add_service_order->save();
+				
 
 				$datatopass = array(
 					'message' => "Your Data Has Been Successfully Saved!",
@@ -1446,7 +1469,7 @@ class SalesController extends Controller {
 				$add_service_list->service_by		=$service_by;
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
-				$add_service_list->item				=$item;
+				$add_service_list->item				=Products::find($item)->product_name;
 				$add_service_list->unit_cost		=$unit_cost;
 				$add_service_list->qty				=$qty;
 				$add_service_list->total			=$total;

@@ -27,7 +27,7 @@
                                 <h3 class="block-title">Add Services</h3>
                             </div>
                         <div class="block-content">
-                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_service_report')}}" method="post">
+                            <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_service_report/'.$order_service->id)}}" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -50,7 +50,7 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-firstname">Station/Location</label>
-                                                <input class="form-control input-lg" type="text" id="station_location" name="station_location" placeholder="Enter Account Name">
+                                                <input class="form-control input-lg" type="text" id="station_location" name="station_location" placeholder="Enter Station/Location">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
@@ -99,19 +99,18 @@
                                         <div class="form-group">
                                             <div class="col-xs-6">
                                               <div class="form-material">
-                                                    <select class="js-select2 form-control" id="item" name="item" style="width: 100%;" data-placeholder="Choose one.." onchange="item_listener(0)">
-                                                        <option selected disabled>Select Item</option>
-                                                        @foreach($product as $p)
-                                                            <option value="{{$p->id}}">{{$p->product_name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <label for="example2-select2">Item</label>
+                                                @foreach($orders_product as $op)
+                                                        <input class="form-control input-lg" type="text" id="item" name="item" value="{{$op->products}}">
+                                                @endforeach
+                                                <label for="example2-select2">Item</label>
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Unit Cost</label>
-                                                <input class="form-control input-lg" type="number" id="unit_cost" name="unit_cost" placeholder="Enter Unit Cost">
+                                                @foreach($orders_product as $op)
+                                                    <input class="form-control input-lg" type="number" id="unit_cost" name="unit_cost" value="{{$op->price}}">
+                                                @endforeach
                                               </div>
                                             </div>
                                         </div>

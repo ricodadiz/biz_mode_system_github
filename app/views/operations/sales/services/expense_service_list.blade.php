@@ -5,7 +5,7 @@
                 <div class="content content-boxed">
                     <!-- Header Tiles -->
                     <div class="row">
-                        <div class="col-sm-6 col-md-3">
+                        {{-- <div class="col-sm-6 col-md-3">
                         @if($user->can('add_service'))
                             <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/add_expense_service_view')}}">
                                 <div class="block-content block-content-full">
@@ -14,7 +14,7 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Add New Service</div>
                             </a>
                         @endif
-                        </div>
+                        </div> --}}
                         {{-- <div class="col-sm-6 col-md-3">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
@@ -140,7 +140,7 @@
                                             <td></td>
                                             <td></td>
                                             <td class="text-right"> <strong >Total:</strong></td>
-                                            <td></td>
+                                            <td class="text-center"> {{$services_total}}</td>
                                             <td>
                                               
                                             </td>

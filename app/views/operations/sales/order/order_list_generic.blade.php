@@ -59,9 +59,8 @@
                                     <tr>
                                         <th class="text-center" style="width: 150px;">Order ID</th>
                                         <th>Customer Name</th>
-                                        <th class="hidden-xs">Submitted</th>
-                                       <!--  <th class="hidden-xs">Products</th>
-                                        <th class="hidden-xs" style="width: 15%;">Value</th> -->
+                                        <th class="hidden-xs">Order Date</th>
+                                        <th class="hidden-xs">Warranty Status</th>
                                         <th class="text-center" style="width: 10%;">Actions</th>
                                     </tr>
                                 </thead>
@@ -70,12 +69,25 @@
                                     <tr>
                                         <td class="text-center">{{$og->id}}</td>
                                         <td class="font-w600">{{$og->customer_name}}</td>
-                                        <td class="hidden-xs">{{$og->date_order}}</td>
-                                        
+                                        <td class="font-w600">{{$og->date_order}}</td>
+                                        <?php 
+                                              $date = new DateTime(); 
+                                              $result = $date->format('Y-m-d');
+                                        ?> 
+                                        @if(OrdersProduct::where('order_id',$og->id)->first()->order_product_warranty_date == $result)
+                                            <td><strong class="label label-danger">Out of Warranty</strong></td>
+                                        @else
+                                            <td><strong class="label label-success">Under Warranty</strong></td>
+                                        @endif
                                         <td class="text-center">
                                             <div class="btn-group">
                                                <!--  <a href="{{URL::to('sales/'.$company->id.'/order_update_generic_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Order"><i class="fa fa-pencil text-primary"></i></a> -->
-                                               <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Invoice"><i class="fa fa-info-circle text-info"></i></a>
+                                                @if(OrdersProduct::where('order_id',$og->id)->first()->order_product_warranty_date == $result)
+                                                    <a href="{{URL::to('sales/'.$company->id.'/add_service/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Add Service"><i class="fa fa-wrench text-info"></i></a>
+                                                @else
+                                                    <a href="{{URL::to('sales/'.$company->id.'/add_expense_service_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Add Service"><i class="fa fa-wrench text-info"></i></a>
+                                                @endif
+                                                <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Sales Invoice"><i class="fa fa-info-circle text-info"></i></a>
                                                 <a href="{{URL::to('sales/'.$company->id.'/view_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Order Info"><i class="fa fa-eye text-info"></i></a>
                                                 <a data-toggle="modal" data-target="#modal-popout-{{$og->id}}" class="btn btn-xs btn-default" type="button" title="Remove Order"><i class="fa fa-times text-danger"></i></a>
                                             </div>
