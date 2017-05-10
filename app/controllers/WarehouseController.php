@@ -592,7 +592,6 @@ class WarehouseController extends Controller {
 		$product_code = strtoupper(strip_tags(Input::get("product-code")));
 		$model_code = strtoupper(strip_tags(Input::get("model-code")));
 		$warranty = strtoupper(strip_tags(Input::get("warranty")));
-		$product_stock = strtoupper(strip_tags(Input::get("stock-product")));
 		$product_price = strtoupper(strip_tags(Input::get("price-product")));
 		$product_category = strtoupper(strip_tags(Input::get("category-product")));
 		$product_brand = strtoupper(strip_tags(Input::get("brand-product")));
@@ -602,7 +601,6 @@ class WarehouseController extends Controller {
 		$validator = Validator::make(
 		    array(
 		        'product_name' 			=> $product_name,
-		        'product_stock' 		=> $product_stock,
 		        'product_price'			=> $product_price,
 		        'product_category' 		=> $product_category,
 		        'product_brand' 		=> $product_brand,
@@ -614,7 +612,6 @@ class WarehouseController extends Controller {
 		    ),
 		    array(
 		        'product_name' 			=> 'required|min:3',
-		        'product_stock' 		=> 'required|numeric|min:0',
 		        'product_price' 		=> 'required|numeric|min:0',
 		        'product_category' 		=> 'required',
 		        'product_brand' 		=> 'required',
@@ -635,7 +632,6 @@ class WarehouseController extends Controller {
 			$new_product->product_code 	= $product_code;
 			$new_product->model_code 	= $model_code;
 			$new_product->warranty	 	= $warranty;
-			$new_product->in_stock 		= $product_stock;
 			$new_product->product_price = $product_price;
 			$new_product->category 		= $product_category;
 			$new_product->brand			= $product_brand;

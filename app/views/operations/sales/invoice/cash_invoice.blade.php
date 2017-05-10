@@ -28,10 +28,10 @@
                             <div class="h5 text-center">206 Lot 1 Block 93, Sadawa Road, brgy. Bucana, Davao City</div>
                             <div class="h5 text-center"><strong>JOYVILYN B. BASA</strong> -Prop</div>
                             <div class="h5 text-center push-30">Vat Reg. TIN 307-378-697-000</div>
-                            @foreach($orders_generic as $og)
-                            <div class="h5 text-right"><strong>NO.{{$og->reference_no}}</strong></div>
-                            @endforeach
-                            <div class="h3 text-center "><strong>SALES INVOICE</strong></div>
+                           
+                            <div class="h5 text-right"><strong>NO.</strong></div>
+                         
+                            <div class="h3 text-center "><strong>CASH INVOICE</strong></div>
                             <hr class="hidden-print">
                             <div class="row items-push-2x">
                                 <!-- Company Info -->
@@ -40,29 +40,24 @@
                             <div class="block-content">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="text-center"><b>Sold to:</b>{{$clients->client_customer_name}}</div>
+                                        <div class="text-center"><b>Sold to:</b></div>
                                     </div>
                                     <div class="col-xs-6">
-                                         @foreach($orders_generic as $og)
-                                            <div class="text-center"><b>Date:</b>{{$og->date_order}}</div>
-                                         @endforeach
+                                        
+                                            <div class="text-center"><b>Date:</b></div>
+                                      
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="text-center"><b>Shipping Address: </b>{{$clients->client_shipping_address}}</div>
+                                        <div class="text-center"><b>Shipping Address: </b></div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <div class="text-center"><b>Billing Address: </b>{{$clients->client_billing_address}}</div>
+                                        <div class="text-center"><b>Billing Address: </b></div>
                                     </div>
                                 </div>
                             </div>
                             </div>
-                               {{--  @if($order->tin == '')
-                                <p> </p>
-                                @else
-                                <p>TIN: {{$order->tin}}</p>
-                                @endif --}}
                                 <!-- END Company Info -->
                             </div>
                             <!-- END Invoice Info -->
@@ -79,16 +74,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($orders_product as $op)
+                                     
                                         <tr>
                                             <td>
-                                            <p class="font-w600 push-10">{{$op->products}}</p>
+                                            <p class="font-w600 push-10"></p>
                                                <!--  <div class="text-muted">Design/Development of iOS and Android application</div> -->
                                             </td>
-                                            <td class="text-center"><span class="badge badge-primary">{{$op->quantity}}</span></td>
-                                            <td class="text-right">₱ {{$op->price}}</td>
-                                            <td class="text-right">₱ {{$op->amount}}</td>
-                                        @endforeach
+                                            <td class="text-center"><span class="badge badge-primary"></span></td>
+                                            <td class="text-right">₱ </td>
+                                            <td class="text-right">₱ </td>
+                                      
                                         </tr>
                                         <!-- <tr>
                                             <td colspan="4" class="font-w600 text-right">Subtotal</td>
@@ -106,7 +101,7 @@
                                             <td colspan="4" class="font-w700 text-uppercase text-right">Total Due</td>
                                             <td class="font-w700 text-right">$ 33.000,00</td>
                                         </tr> -->
-                                        @foreach($orders_generic as $og)   
+                                        
                                         <tr>
                                             <td colspan="3" class="font-w600 text-right">Less.VAT</td>
                                             <td class="text-right">₱</td>
@@ -117,23 +112,20 @@
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="font-w600 text-right">Total Price</td>
-                                            <td class="text-right">₱ {{$og->total_amount}}</td>
+                                            <td class="text-right">₱ </td>
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="font-w600 text-right">Amount Paid</td>
-                                            <td class="text-right">₱ {{$og->amount_paid}}</td>
+                                            <td class="text-right">₱ </td>
                                         </tr>
                                         <tr class="active">
-                                         @if($og->amount_paid > $og->total_amount)
-                                            <?php $change = $og->amount_paid - $og->total_amount; ?>
+                                         
                                             <td colspan="3" class="text-right text-uppercase"><strong>Change:</strong></td>
-                                            <td class="text-right"><strong>₱ {{$change}}</strong></td>
-                                        @else
-                                        <?php $balance= $og->amount_paid - $og->total_amount ; ?>
+                                            <td class="text-right"><strong>₱ </strong></td>
+                                        
                                             <td colspan="3" class="text-right text-uppercase"><strong>Balance:</strong></td>
-                                            <td class="text-right"><strong>₱ {{$balance}}</strong></td>
-                                        @endif
-                                        @endforeach
+                                            <td class="text-right"><strong>₱ </strong></td>
+                                        
                                         </tr>
                                     </tbody>
                                 </table>
@@ -152,7 +144,7 @@
                                     <div class="col-md-4 text-right">Cashier/Authorized Representative</div>
                                 </div>
                             </div>
-                            <p class="text-muted text-center"><small>"THIS INVOICE SHALL BE VALIK FOR (5)YEARS FROM THE DATE OF ATP."</small></p>
+                            <p class="text-muted text-center"><small>"THIS INVOICE SHALL BE VALID FOR (5)YEARS FROM THE DATE OF ATP."</small></p>
                             <!-- END Footer -->
                         </div>
                     </div>

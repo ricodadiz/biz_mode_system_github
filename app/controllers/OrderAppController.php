@@ -54,7 +54,7 @@ class OrderAppController extends BaseController {
 			//dd($vat_value);
 			//dd($name);
 			$datatopass  = array(
-				'title' 		=> "Invoice Order - Beezmode",
+				'title' 		=> "Sales Invoice",
 				'page_label'	=> "Invoice Order",
 				'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 				'company' 		=> Companies::where('id',$id)->first(),

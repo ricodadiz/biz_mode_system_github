@@ -531,11 +531,11 @@
                                                 @endif
                                             </ul>
                                         </li>
-                                         <li>
+                                        <li>
                                             @if($user->can('view_client'))
                                             <a href="{{URL::to('sales/'.$company->id.'/invoice')}}">Invoice</a>
                                             @endif
-                                        </li>   
+                                        </li>
                                     </ul>                                   
                                 </li>
 {{-- START OF ACCOUNTING MENU--}}
@@ -790,12 +790,6 @@
             <!-- Main Container -->
             <main id="main-container">
                 <!-- Page Header -->
-                <div class="content bg-image overflow-hidden" style="background-image: url('{{asset('assets/img/photos/photo12@2x.jpg')}}');">
-                    <div class="push-50-t push-15">
-                        <h1 class="h2 text-white animated zoomIn">{{$page_header}} - {{$page_label}}</h1>
-                        <h2 class="h5 text-white-op animated zoomIn">Welcome, {{$user->username}}!</h2>
-                    </div>
-                </div>
                 <!-- END Page Header -->
 
                 <!-- Stats -->
