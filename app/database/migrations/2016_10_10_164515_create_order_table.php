@@ -15,7 +15,6 @@ class CreateOrderTable extends Migration {
 		Schema::create('orders_generics', function ($table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->integer('service_id')->nullable();
             $table->string('customer_name');
             $table->date('date_order');
             $table->string('reference_no');

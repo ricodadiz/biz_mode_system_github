@@ -15,6 +15,7 @@ class CreateExpensesServiceTable extends Migration {
 		Schema::create('expenses_services', function ($table) {
             $table->increments('id');
             $table->integer('company_id');
+            $table->string('customer_name');
             $table->date('service_date');
             $table->string('sr_no');
             $table->string('station_location');
@@ -22,10 +23,6 @@ class CreateExpensesServiceTable extends Migration {
             $table->string('service_by');
             $table->string('work_details');
             $table->string('remarks_result');
-            $table->string('item');
-            $table->string('unit_cost');
-            $table->string('qty');
-            $table->string('total');
             $table->softDeletes();
             $table->timestamps();
         });

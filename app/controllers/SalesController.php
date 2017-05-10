@@ -1294,8 +1294,9 @@ class SalesController extends Controller {
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
 			'expenses' 		=> ExpensesServices::where('company_id',$id)->get(),
+			'client_services' =>ClientsServices::where('service_id',$id)->get(),
 			'services_count'=> ExpensesServices::where('company_id',$id)->count(),
-			'services_total'=> ExpensesServices::where('company_id',$id)->sum('total'),
+			'services_total'=> ClientsServices::sum('total'),
 		);
 		return View::make('operations.sales.services.expense_service_list',$datatopass);
 	}
@@ -1335,6 +1336,7 @@ class SalesController extends Controller {
 
 	public function add_expense_service($id,$order_id){
 
+			$customer_name		 = strip_tags(Input::get("customer_name"));
 			$service_date		 = strip_tags(Input::get("service_date"));
 			$sr_no	 			 = strip_tags(Input::get("sr_no"));
 			$station_location 	 = strip_tags(Input::get("station_location"));	
@@ -1342,10 +1344,10 @@ class SalesController extends Controller {
 			$service_by 		 = strip_tags(Input::get("service_by"));
 			$work_details 		 = strip_tags(Input::get("work_details"));
 			$remarks_result 	 = strip_tags(Input::get("remarks_result"));
-			$item 		 		 = strip_tags(Input::get("item"));
-			$unit_cost 		 	 = strip_tags(Input::get("unit_cost"));
-			$qty 		 		 = strip_tags(Input::get("qty"));
-			$total 	 			 = strip_tags(Input::get("total"));
+			$item 		 		 = Input::get("item");
+			$unit_cost 		 	 = Input::get("unit-cost");
+			$qty 		 		 = Input::get("qty");
+			$total 	 			 = Input::get("total");
 
 			$validator = Validator::make(
 			    array(
@@ -1356,10 +1358,6 @@ class SalesController extends Controller {
 			        'service_by'		=> $service_by,
 			        'work_details'		=> $work_details,
 			        'remarks_result'	=> $remarks_result,
-			        'item'				=> $item,
-			        'unit_cost'			=> $unit_cost,
-			        'qty'				=> $qty,
-			        'total'				=> $total,
 			    ),
 			    array(
 			    	
@@ -1370,10 +1368,6 @@ class SalesController extends Controller {
 			        'service_by'		=>'required|regex:([0-9a-zA-Z])',
 			        'work_details'		=>'required|regex:([0-9a-zA-Z])',
 			        'remarks_result'	=>'required|regex:([0-9a-zA-Z])',
-			        'item'				=>'regex:([0-9a-zA-Z])',
-			        'unit_cost'			=>'regex:([0-9a-zA-Z])',
-			        'qty'				=>'regex:([0-9a-zA-Z])',
-			        'total'				=>'regex:([0-9a-zA-Z])',
 			    )
 			);
 
@@ -1382,6 +1376,7 @@ class SalesController extends Controller {
 				
 				$add_service_list = new ExpensesServices;
 				$add_service_list->company_id		=$id;
+				$add_service_list->customer_name	=$customer_name;
 				$add_service_list->service_date		=$service_date;
 				$add_service_list->sr_no			=$sr_no;
 				$add_service_list->station_location	=$station_location;
@@ -1389,16 +1384,23 @@ class SalesController extends Controller {
 				$add_service_list->service_by		=$service_by;
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
-				$add_service_list->item				=$item;
-				$add_service_list->unit_cost		=$unit_cost;
-				$add_service_list->qty				=$qty;
-				$add_service_list->total			=$total;
 				$add_service_list->save();
 
-				$add_service_order = OrdersGeneric::find($order_id);
-				$add_service_order->service_id = $add_service_list->id;
-				$add_service_order->save();
-				
+			 	$i=0;
+			 	foreach($item as $it) {
+				 	$client_service_list = new ClientsServices;
+				 	$client_service_list->service_id 	=$add_service_list->id;
+					$client_service_list->item			=Products::find($item[$i])->product_name;
+					$client_service_list->unit_cost		=$unit_cost[$i];
+					$client_service_list->qty			=$qty[$i];
+					$client_service_list->total			=$total[$i];
+					$client_service_list->save();
+
+				$reduce_quantity = Products::find($it);
+				$reduce_quantity->in_stock -= $qty[$i];
+				$reduce_quantity->save();
+				$i++;					
+				}
 
 				$datatopass = array(
 					'message' => "Your Data Has Been Successfully Saved!",

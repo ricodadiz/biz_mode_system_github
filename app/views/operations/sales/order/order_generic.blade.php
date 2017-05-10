@@ -281,11 +281,7 @@
                 });
         }
     </script>
-
-
-
-
-        <script type="text/javascript">
+    <script type="text/javascript">
                 // uiHelperCkeditor();
                 CKEDITOR.disableAutoInline = true;
 
@@ -306,6 +302,6 @@
                 // Init page helpers (Appear + CountTo plugins)
                 App.initHelpers(['appear', 'appear-countTo']);
             });
-        </script>
+    </script>
                                         
 @stop
