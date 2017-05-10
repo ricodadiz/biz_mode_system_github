@@ -203,7 +203,7 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <a class="font-w600" href="base_pages_profile.html">Niko Colendra</a>
+                                                <a class="font-w600" href="base_pages_profile.html">Aaron Calalo</a>
                                                 <span class="text-muted">(5/5)</span>
                                             </div>
                                             <div class="font-s13">Great value for money and awesome support! Would buy new features again and again! Thanks!</div>

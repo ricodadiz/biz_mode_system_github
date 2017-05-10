@@ -6,28 +6,20 @@
                 <div class="content content-boxed">
                     <!-- Header Tiles -->
                     <div class="row">
-                        <div class="col-xs-6 col-sm-4">
+                        <div class="col-sm-6">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$client_count}}"></div>
+                                    <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$client_count}}"></div>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">No. of Clients</div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">No. of Clients</div>
                             </a>
                         </div>
-                        {{-- <div class="col-xs-6 col-sm-4">
-                            <a class="block block-link-hover3 text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
-                                </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">Total Available Stock</div>
-                            </a>
-                        </div> --}}
-                        <div class="col-xs-12 col-sm-4">
+                        <div class="col-sm-6">
                             <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/client_list')}}">
                                 <div class="block-content block-content-full">
                                     <div class="h4 font-w50 text-info"><i class="glyphicon glyphicon-list fa-2x"></i></div>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">Back to Client list</div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">Back to Client list</div>
                             </a>
                         </div>
                     </div>

@@ -158,29 +158,37 @@
                                                         <h3 class="block-title">{{$p->product_name}}</h3>
                                                     </div>
                                                     <div class="block-content">
-                                                    <div class="row"><center>
-                                                        <img class="img-responsive" src="{{$p->product_photo}}">
-                                                        <span><b>Product name:</b> {{$p->product_name}}</span><br>
-                                                        <span><b>Product Code:</b> {{$p->product_code}}</span><br>
-                                                        <span><b>Model Code:</b> {{$p->model_code}}</span><br>
-                                                        <span><b>Supplier Code:</b> {{$p->supplier_code}}</span><br>
-                                                        <br>
-                                                        <span><b>Product Warranty: </b>{{$p->warranty}} days
-                                                        </span><br>
-                                                        <span><b>Stock:</b> {{$p->in_stock}}</span><br>
-                                                        <span><b>Price:</b> {{$p->product_price}}</span><br>
-                                                        <span><b>Status:</b>
-                                                        @if($p->in_stock > 0)
-                                                            Available
-                                                        @else
-                                                            Out of Stock
-                                                        @endif
-                                                        </span><br>
-                                                        <span><b>Category:</b> {{$p->category}}</span><br>
-                                                        <span><b>Brand:</b> {{$p->brand}}</span><br>
-                                                        <span><b>Warehouse:</b> {{$p->warehouse}}</span><br>
-                                                        <b>Description:</b> {{$p->description}}
-                                                    </center>
+                                                    <div class="row">
+                                                        <img class="img-responsive push-20" src="{{$p->product_photo}}">
+                                                
+                                                    <div class="block">
+                                                        <div class="col-md-6">
+                                                            <h3 class="block-title">Product name: {{$p->product_name}}</h3>
+                                                            <h3 class="block-title">Product Code: {{$p->product_code}}</h3>
+                                                            <h3 class="block-title">Model Code: {{$p->model_code}}</h3>
+                                                            <h3 class="block-title">Supplier Code: {{$p->supplier_code}}</h3>
+                                                            <h3 class="block-title">Product Warranty: {{$p->warranty}} days
+                                                            </h3>
+                                                            <h3 class="block-title">Stock:</b> {{$p->in_stock}}</h3>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <h3 class="block-title">Price: {{$p->product_price}}</h3>
+                                                            <h3 class="block-title">Status:
+                                                            @if($p->in_stock > 0)
+                                                                Available
+                                                            @else
+                                                                Out of Stock
+                                                            @endif
+                                                            </h3>
+                                                            <h3 class="block-title">Category: {{$p->category}}</h3>
+                                                            <h3 class="block-title">Brand: {{$p->brand}}</h3>
+                                                            <h3 class="block-title">Warehouse: {{$p->warehouse}}</h3>
+                                                            <h3 class="block-title">Description: {{$p->description}}</h3>
+                                                        </div>
+                                                    </div>
+
+                                                    
                                                     </div>
                                                     </div>
                                                 </div>
