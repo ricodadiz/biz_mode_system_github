@@ -16,7 +16,7 @@
                         <div class="block-header bg-gray-lighter">
                             <ul class="block-options">
                                 <li>
-                                    <a href="{{URL::to('sales/'.$company->id.'/expense_technician_list')}}">
+                                    <a href="{{URL::to('sales/'.$company->id.'/expense_technician')}}">
                                     <button class="btn btn-default" type="button"><i class="fa fa-arrow-left"></i> Technician Allowance List</button>
                                     </a>
                                 </li>
