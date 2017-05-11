@@ -34,7 +34,7 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Customer Name</label>
-                                                <input class="form-control input-lg" type="text" id="customer_name" name="customer_name"  value="{{$clients->client_customer_name}}">
+                                                <input class="form-control input-lg" type="text" id="customer_name" name="customer_name"  value="{{$clients->client_customer_name}}" readonly>
                                               </div>
                                             </div>
                                         </div>
@@ -162,11 +162,11 @@
                                 <div class="row">
                                   <div class="col-sm-6">
                                     <div class="form-group">
-                                        <div class="col-xs-3">
+                                        {{-- <div class="col-xs-3">
                                             <div class="form-material">
                                                 <button class="btn btn-success newline"><i class="fa fa-plus push-5-r"></i> Add New Line</button>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-xs-6">
                                             <div class="form-material">

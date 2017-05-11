@@ -36,7 +36,7 @@
                         </div>
                     </div>
 
-                @if(Session::get('delete_error'))
+                    @if(Session::get('delete_error'))
                         <div class="alert alert-error alert-danger">
                         @foreach(Session::get('delete_error')->all() as $m)
                             {{$m}}<br>    
@@ -47,7 +47,7 @@
                         <div class="alert alert-success">
                         {{Session::get('message_delete')["message"]}}
                         </div>
-                    @endif
+                    @endif 
                 <div class="block">
                         <div class="block-header bg-gray-lighter">
                             <h3 class="block-title">All Orders</h3>
@@ -60,7 +60,7 @@
                                         <th class="text-center" style="width: 150px;">Order ID</th>
                                         <th>Customer Name</th>
                                         <th class="hidden-xs">Order Date</th>
-                                        <th class="hidden-xs">Warranty Status</th>
+                                        {{-- <th class="hidden-xs">Warranty Status</th> --}}
                                         <th class="text-center" style="width: 10%;">Actions</th>
                                     </tr>
                                 </thead>
@@ -74,19 +74,15 @@
                                               $date = new DateTime(); 
                                               $result = $date->format('Y-m-d');
                                         ?> 
-                                        @if(OrdersProduct::where('order_id',$og->id)->first()->order_product_warranty_date == $result)
+                                        {{-- @if(OrdersProduct::where('order_id',$og->id)->first()->order_product_warranty_date == $result)
                                             <td><strong class="label label-danger">Out of Warranty</strong></td>
                                         @else
                                             <td><strong class="label label-success">Under Warranty</strong></td>
-                                        @endif
+                                        @endif --}}
                                         <td class="text-center">
                                             <div class="btn-group">
                                                <!--  <a href="{{URL::to('sales/'.$company->id.'/order_update_generic_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Order"><i class="fa fa-pencil text-primary"></i></a> -->
-                                                @if(OrdersProduct::where('order_id',$og->id)->first()->order_product_warranty_date == $result)
-                                                    <a href="{{URL::to('sales/'.$company->id.'/add_service/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Add Service"><i class="fa fa-wrench text-info"></i></a>
-                                                @else
-                                                    <a href="{{URL::to('sales/'.$company->id.'/add_expense_service_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Add Service"><i class="fa fa-wrench text-info"></i></a>
-                                                @endif
+                                               
                                                 <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Sales Invoice"><i class="fa fa-info-circle text-info"></i></a>
                                                 <a href="{{URL::to('sales/'.$company->id.'/view_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Order Info"><i class="fa fa-eye text-info"></i></a>
                                                 <a data-toggle="modal" data-target="#modal-popout-{{$og->id}}" class="btn btn-xs btn-default" type="button" title="Remove Order"><i class="fa fa-times text-danger"></i></a>
