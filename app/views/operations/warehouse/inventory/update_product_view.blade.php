@@ -94,7 +94,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-primary">
                                                     <input class="form-control" type="text" id="add-product" name="warranty" value="{{$product->warranty}}">
-                                                    <label for="product-id">Warranty Date</label>
+                                                    <label for="product-id">Product Warranty(Days)</label>
                                                 </div>
                                             </div>
                                         </div>

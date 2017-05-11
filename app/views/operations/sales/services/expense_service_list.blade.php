@@ -96,7 +96,9 @@
                                         {{$e->station_location}} 
                                         </td>
                                         <td class="hidden-xs text-center">{{$e->service_date}}</td>
-                                        <td class="hidden-xs text-center">{{$e->total}}</td>
+                                        @foreach($client_services as $cs)
+                                        <td class="hidden-xs text-center">{{$cs->total}}</td>
+                                        @endforeach
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
                                                 @if($user->can('view_service'))
@@ -140,7 +142,7 @@
                                             <td></td>
                                             <td></td>
                                             <td class="text-right"> <strong >Total:</strong></td>
-                                            <td class="text-center"> {{$services_total}}</td>
+                                            <td class="text-center">{{$services_total}}</td>
                                             <td>
                                               
                                             </td>

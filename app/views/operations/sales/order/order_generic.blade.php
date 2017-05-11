@@ -218,9 +218,6 @@
                                 </div>
                             </div>
                           </div>
-
-
-
         <script type="text/javascript">
         var submit=0;
         var id=1;
@@ -281,11 +278,7 @@
                 });
         }
     </script>
-
-
-
-
-        <script type="text/javascript">
+    <script type="text/javascript">
                 // uiHelperCkeditor();
                 CKEDITOR.disableAutoInline = true;
 
@@ -306,6 +299,6 @@
                 // Init page helpers (Appear + CountTo plugins)
                 App.initHelpers(['appear', 'appear-countTo']);
             });
-        </script>
+    </script>
                                         
 @stop
