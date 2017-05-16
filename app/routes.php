@@ -131,6 +131,7 @@ Route::get('sales/{id}/update_expense_service_view/{service_id}', array('before'
 Route::post('sales/{id}/update_expense_service/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_expense_service'));
 Route::get('sales/{id}/add_expense_technician_view', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician_view'));
 Route::post('sales/{id}/add_expense_technician', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician'));
+Route::get('sales/{id}/expense_technician', array('before' => 'auth|view_service', 'uses' =>'SalesController@expense_technician'));
 
 Route::get('sales/{id}/invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@invoice'));
 Route::get('sales/{id}/cash_invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@cash_invoice'));

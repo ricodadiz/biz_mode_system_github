@@ -1531,6 +1531,20 @@ class SalesController extends Controller {
 		}	
 	}
 
+	public function expense_technician($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Technician Allowance(Under Warranty) - Beezmode",
+			'page_label'	=> "Technician Allowance(Under Warranty)",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+			'technician' 	=> Technicians::where('company_id',$id)->get(),
+			'technician_count' => Technicians::where('company_id',$id)->count()
+		);
+		return View::make('operations.sales.services.expense_technician',$datatopass);
+	}
+
 	public function add_expense_technician_view($id)
 	{
 		$datatopass  = array(
