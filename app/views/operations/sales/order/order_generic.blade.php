@@ -112,13 +112,13 @@
                                                     </div>
                                                     <div class="col-xs-1">
                                                         <div class="form-material">
-                                                            <input class="form-control order-price" type="text" name="order-price[]" id="order-price">
+                                                            <input class="form-control order-price" type="text" name="order-price[]" id="order-price" onkeyup="total_amount(this)">
                                                             <label for="register5-lastname">Price</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-1">
                                                         <div class="form-material">
-                                                            <select class="form-control order-vat" name="order-vat[]" style="width: 100%;">
+                                                            <select class="form-control order-vat" name="order-vat[]" style="width: 100%;" onchange="total_amount(this)">
                                                             <option selected disabled></option>
                                                             @foreach($vat as $v)
                                                             <option value="{{$v->vat_value}}">
@@ -331,13 +331,13 @@
                                     '</div>' +
                                     '<div class="col-xs-1">' +
                                         '<div class="form-material">' +
-                                            '<input type="text" class="form-control order-price" name="order-price[]" />' +
+                                            '<input type="text" class="form-control order-price" name="order-price[]" onkeyup="total_amount(this)"/>' +
                                             '<label for="example2-select2">Price</label>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="col-xs-1">' +
                                         '<div class="form-material">' +
-                                            '<select class="form-control order-vat" name="order-vat[]" style="width: 100%;">' +'<option selected disabled></option>'+'@foreach($vat as $v)'+'<option value="{{$v->vat_value}}">'+'{{$v->vat_value}}'+'</option>'+'@endforeach'+'</select>'+
+                                            '<select class="form-control order-vat" name="order-vat[]" style="width: 100%;" onchange="total_amount(this)">' +'<option selected disabled></option>'+'@foreach($vat as $v)'+'<option value="{{$v->vat_value}}">'+'{{$v->vat_value}}'+'</option>'+'@endforeach'+'</select>'+
                                             '<label for="example2-select2">VAT%</label>' +
                                         '</div>' +
                                     '</div>' +
