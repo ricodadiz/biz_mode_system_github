@@ -101,6 +101,7 @@ class OrderAppController extends BaseController {
 				'clients'		=> Clients::where('company_id',$id)->get(),
 				'in_stock' 		=> Products::where('in_stock','>',0) ->get(),
 				'orders_count'  => OrdersGeneric::where('company_id',$id)->count(),
+				'vat'			=> Vats::where('company_id',$id)->get(),
 			);
 			return View::make('operations.sales.order.order_generic',$datatopass);
 		}
