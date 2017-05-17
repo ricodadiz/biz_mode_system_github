@@ -15,20 +15,20 @@
                     @endif
 
                 <div class="row">
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-sm-6">
                                 <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                     <div class="block-content block-content-full">
-                                        <div class="h1 font-w700" data-toggle="countTo" data-to="{{$orders_count}}"></div>
+                                        <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$orders_count}}"></div>
                                     </div>
-                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Product Order</div>
+                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">All Product Order</div>
                                 </a>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-sm-6">
                                 <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/order_list_generic')}}">
                                     <div class="block-content block-content-full">
                                         <div class="h4 font-w50 text-info"><i class="glyphicon glyphicon-list fa-2x"></i></div>
                                     </div>
-                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">Back to Product Order List</div>
+                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">Back to Product Order List</div>
                                 </a>
                             </div>
                         </div>

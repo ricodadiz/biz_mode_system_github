@@ -2,7 +2,7 @@
 @section('content')
 
                 <div class="row">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6">
                             <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/order_generic')}}">
                                 <div class="block-content block-content-full">
                                     <div class="h1 font-w700 text-success"><i class="fa fa-plus"></i></div>
@@ -10,28 +10,12 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Process Order</div>
                             </a>
                         </div>
-                        {{-- <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
+                                    <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$orders_count}}"></div>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">For Delivery</div>
-                            </a>
-                        </div> --}}
-                        {{-- <div class="col-sm-6 col-md-3">
-                            <a class="block block-link-hover3 text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
-                                </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">Top Orders</div>
-                            </a>
-                        </div> --}}
-                        <div class="col-sm-6 col-md-3">
-                            <a class="block block-link-hover3 text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$orders_count}}"></div>
-                                </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Orders</div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">All Orders</div>
                             </a>
                         </div>
                     </div>
