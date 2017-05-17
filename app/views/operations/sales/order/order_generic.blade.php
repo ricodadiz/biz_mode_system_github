@@ -241,7 +241,11 @@
 
         function delRow(btn_obj)
         {
-            var rowidx = $(btn_obj).closest('div.row-line').index();
+            var rowidx = $(btn_obj).closest('.row-line').index() - 1;
+
+            // console.log($(btn_obj).closest('.row-line').index());
+
+            // console.log(rowidx);
 
             $('div.row-line:eq('+rowidx+')').remove();
 
