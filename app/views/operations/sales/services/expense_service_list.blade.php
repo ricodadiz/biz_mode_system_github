@@ -99,7 +99,6 @@
                                         @foreach($client_services as $cs)
                                         <td class="hidden-xs text-center">{{$cs->total}}</td>
                                         @endforeach
-                                        <td class="hidden-xs text-center"></td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
                                                 @if($user->can('view_service'))

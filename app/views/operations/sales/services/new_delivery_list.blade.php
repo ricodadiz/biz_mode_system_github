@@ -31,8 +31,8 @@
                                                 <div class="col-sm-8 col-sm-offset-2">
                                                     <div class="form-material">
                                                         <select class="form-control" id="delivered_to" name="delivered_to">
-                                                            @foreach($orders as $o)
-                                                                <option value="{{$o->recipient_name}}">{{$o->recipient_name}}</option>
+                                                            @foreach($order as $o)
+                                                                <option value="{{$o->customer_name}}">{{$o->customer_name}}</option>
                                                             @endforeach
                                                         </select>
                                                         <label for="simple-firstname">Delivered to</label>
