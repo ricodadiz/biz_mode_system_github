@@ -15,20 +15,20 @@
                     @endif
 
                 <div class="row">
-                            <div class="col-xs-6 col-sm-4">
+                            <div class="col-sm-6">
                                 <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                     <div class="block-content block-content-full">
-                                        <div class="h1 font-w700" data-toggle="countTo" data-to="{{$orders_count}}"></div>
+                                        <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$orders_count}}"></div>
                                     </div>
-                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Product Order</div>
+                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">All Product Order</div>
                                 </a>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-sm-6">
                                 <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/order_list_generic')}}">
                                     <div class="block-content block-content-full">
                                         <div class="h4 font-w50 text-info"><i class="glyphicon glyphicon-list fa-2x"></i></div>
                                     </div>
-                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">Back to Product Order List</div>
+                                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">Back to Product Order List</div>
                                 </a>
                             </div>
                         </div>
@@ -112,13 +112,13 @@
                                                     </div>
                                                     <div class="col-xs-1">
                                                         <div class="form-material">
-                                                            <input class="form-control order-price" type="text" name="order-price[]" id="order-price">
+                                                            <input class="form-control order-price" type="text" name="order-price[]" id="order-price" onkeyup="total_amount(this)">
                                                             <label for="register5-lastname">Price</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-1">
                                                         <div class="form-material">
-                                                            <select class="form-control order-vat" name="order-vat[]" style="width: 100%;">
+                                                            <select class="form-control order-vat" name="order-vat[]" style="width: 100%;" onchange="total_amount(this)">
                                                             <option selected disabled></option>
                                                             @foreach($vat as $v)
                                                             <option value="{{$v->vat_value}}">
@@ -241,9 +241,22 @@
 
         function delRow(btn_obj)
         {
-            var rowidx = $(btn_obj).closest('div.row-line').index();
+            var rowidx = $(btn_obj).closest('.row-line').index() - 1;
 
-            $('div.row-line:eq('+rowidx+')').remove();
+            $(btn_obj).prop('disabled', true);
+
+            // console.log($(btn_obj).closest('.row-line').index());
+
+            // console.log(rowidx);
+
+            // $('div.row-line:eq('+rowidx+')').remove();
+            $('div.row-line:eq('+rowidx+')').animate({
+                        opacity: "hide",
+                        width: "0",
+                        height: "0"
+                    }, 600, function(){
+                        $(this).remove();
+                    });
 
             // console.log(rowidx);
         }
@@ -296,7 +309,7 @@
             id++;
         });*/
         $('.newline').click(function(){
-            var newline =  '<div class="row-line">' +
+            var html =  '<div class="row-line">' +
                                 '<div class="form-group">' +
                                     '<div class="col-xs-2">' +
                                         '<div class="form-material">' +
@@ -331,13 +344,13 @@
                                     '</div>' +
                                     '<div class="col-xs-1">' +
                                         '<div class="form-material">' +
-                                            '<input type="text" class="form-control order-price" name="order-price[]" />' +
+                                            '<input type="text" class="form-control order-price" name="order-price[]" onkeyup="total_amount(this)"/>' +
                                             '<label for="example2-select2">Price</label>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="col-xs-1">' +
                                         '<div class="form-material">' +
-                                            '<select class="form-control order-vat" name="order-vat[]" style="width: 100%;">' +'<option selected disabled></option>'+'@foreach($vat as $v)'+'<option value="{{$v->vat_value}}">'+'{{$v->vat_value}}'+'</option>'+'@endforeach'+'</select>'+
+                                            '<select class="form-control order-vat" name="order-vat[]" style="width: 100%;" onchange="total_amount(this)">' +'<option selected disabled></option>'+'@foreach($vat as $v)'+'<option value="{{$v->vat_value}}">'+'{{$v->vat_value}}'+'</option>'+'@endforeach'+'</select>'+
                                             '<label for="example2-select2">VAT%</label>' +
                                         '</div>' +
                                     '</div>' +
@@ -367,14 +380,18 @@
                                 '</div>' +
                             '</div>'
                             ;
-            $(".product_rows").append(newline);
+
+            // Add Animation Option 1
+            // $(html).hide().appendTo(".product_rows").fadeIn(300);
+
+            // Add Animation Option 2
+            $(html).hide().appendTo('.product_rows').slideDown(300);
+
+            // No Add Animation
+            // $(".product_rows").append(html);
             // id++;
         });
-        // $('.delrow').click(function(){
-        //     var rowidx = $(this).closest('product_rows').rowIndex;
-
-        //     console.log(rowidx);
-        // });
+        
         $('#formid').submit(function(e){
             if (submit !=0)
             {

@@ -4,7 +4,7 @@
 		<div class="content content-boxed">
                     <!-- Header Tiles -->
                     <div class="row">
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-4">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
                                     <span class="item item-circle bg-success-light"><i class="fa fa-shopping-cart fa-1.5x"></i></span>
@@ -12,7 +12,7 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Reference No: {{$ref_no}} </div>
                             </a>
                         </div>
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-4">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
                                     <span class="item item-circle bg-success-light"><i class="fa fa-check text-success"></i></span>
@@ -20,15 +20,7 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Payment</div>
                             </a>
                         </div>
-                        {{-- <div class="col-sm-6 col-md-3">
-                            <a class="block block-link-hover3 text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <span class="item item-circle bg-warning-light"><i class="si si-settings fa-spin text-warning"></i></span>
-                                </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-warning font-w600">Packaging</div>
-                            </a>
-                        </div> --}}
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-4">
                             <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/order_list_generic')}}">
                                 <div class="block-content block-content-full">
                                     <span class="item item-circle text-info"><i class="glyphicon glyphicon-list fa-2x"></i></span>
