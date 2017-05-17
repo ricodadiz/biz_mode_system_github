@@ -49,12 +49,12 @@
                         <div class="block-content">
                         @if(isset(Session::get('delete_technician_success')["message"]))
                                     <div class="alert alert-success">
-                                        {{Session::get('delete_technician_success')["message"]}}
+                                        {{Session::get('delete_expense_technician_success')["message"]}}
                                     </div>
                                 @endif
                                 @if(Session::get('delete_technician_error'))
                                     <div class="alert alert-error alert-danger">
-                                    @foreach(Session::get('delete_technician_error')->all() as $m)
+                                    @foreach(Session::get('delete_expense_technician_error')->all() as $m)
                                         {{$m}}<br>    
                                     @endforeach
                                     </div>
@@ -70,23 +70,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($technician as $t)
+                                   @foreach($expense as $e)
                                     <tr>
-                                        <td class="text-center"><strong>{{$t->date}}</strong></a></td>
-                                        <td class="visible-lg">{{$t->name}}</td>
-                                        <td class="hidden-xs text-center">{{$t->particular}}</td>
-                                        <td class="hidden-xs text-center">{{$t->total}}</td>
+                                        <td class="text-center"><strong>{{$e->expense_date}}</strong></a></td>
+                                        <td class="text-left">{{$e->expense_name}}</a></td>
+                                        <td class="text-center">{{$e->expense_particular}}</td>
+                                        <td class="hidden-xs text-center">{{$e->expense_total}}</td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
 
-                                                <a href="{{URL::to('sales/'.$company->id.'/update_technician_view/'.$t->id)}}" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                                                <a href="" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
                                                
-                                                <a data-toggle="modal" data-target="#modal-popout-" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>
+                                                <a data-toggle="modal" data-target="#modal-popout-{{$e->id}}" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>
                                                
                                             </div>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modal-popout-" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="modal-popout-{{$e->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout">
                                             <div class="modal-content">
                                                 <div class="block block-themed block-transparent remove-margin-b">
@@ -103,7 +103,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{{URL::to('sales/{id}/delete_technician/'.$t->id)}}">
+                                                    <a href="{{URL::to('sales/{id}/delete_expense_technician/'.$e->id)}}">
                                                     <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-check"></i> Ok</button>
                                                     </a>
                                                     <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
@@ -111,9 +111,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                 @endforeach
+                                  @endforeach
                                 </tbody>
-                                <thead>
+                              <!--   <thead>
                                         <tr class="info">
                                             <td></td>
                                             <td></td>
@@ -123,7 +123,7 @@
                                               
                                             </td>
                                         </tr>
-                                    </thead>
+                                    </thead> -->
                             </table>
                             <nav class="text-right">
                                 <ul class="pagination pagination-sm">

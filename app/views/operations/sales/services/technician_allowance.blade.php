@@ -5,7 +5,7 @@
                 <div class="content content-boxed">
                     <!-- Header Tiles -->
                     <div class="row">
-                        <div class="col-sm-6 col-md-5">
+                        <div class="col-sm-6">
                         @if($user->can('add_service'))
                             <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/add_technician_allowance_view')}}">
                                 <div class="block-content block-content-full">
@@ -15,12 +15,12 @@
                             </a>
                         @endif
                         </div>
-                        <div class="col-sm-6 col-md-5">
+                        <div class="col-sm-6">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$technician_count}}"></div>
+                                    <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$technician_count}}"></div>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Technician Allowance</div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">All Technician Allowance</div>
                             </a>
                         </div>
                     </div>
@@ -81,12 +81,12 @@
 
                                                 <a href="{{URL::to('sales/'.$company->id.'/update_technician_view/'.$t->id)}}" title="View or Update Service" class="btn btn-default"><i class="fa fa-eye"></i></a>
                                                
-                                                <a data-toggle="modal" data-target="#modal-popout-" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>
+                                                <a data-toggle="modal" data-target="#modal-popout-{{$t->id}}" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>
                                                
                                             </div>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modal-popout-" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="modal-popout-{{$t->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout">
                                             <div class="modal-content">
                                                 <div class="block block-themed block-transparent remove-margin-b">

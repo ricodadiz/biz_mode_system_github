@@ -1311,7 +1311,7 @@ class SalesController extends Controller {
 			'services_count'=> ExpensesServices::where('company_id',$id)->count(),
 			'services_total'=> ClientsServices::sum('total'),
 		);
-		return View::make('operations.sales.services.expense_service_list',$datatopass);
+		return View::make('operations.sales.services.expense.expense_service_list',$datatopass);
 	}
 
 	public function add_expense_service_view($id,$order_id,$service_id)
@@ -1330,7 +1330,7 @@ class SalesController extends Controller {
 			'orders_product'=> OrdersProduct::where('id',$service_id)->get(),
 			'clients'		=> Clients::where('client_customer_name',$name)->first(),
 		);
-		return View::make('operations.sales.services.add_expense_service_view',$datatopass);
+		return View::make('operations.sales.services.expense.add_expense_service_view',$datatopass);
 	}
 
 	public function update_expense_service_view($id,$service_id)
@@ -1534,15 +1534,15 @@ class SalesController extends Controller {
 	public function expense_technician($id)
 	{
 		$datatopass  = array(
-			'title' 		=> "Technician Allowance(Under Warranty) - Beezmode",
-			'page_label'	=> "Technician Allowance(Under Warranty)",
-			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
-			'company' 		=> Companies::where('id',$id)->first(),
-			'user'			=> Confide::user(),
-			'technician' 	=> Technicians::where('company_id',$id)->get(),
-			'technician_count' => Technicians::where('company_id',$id)->count()
+			'title' 			=> "Technician Allowance(Under Warranty) - Beezmode",
+			'page_label'		=> "Technician Allowance(Under Warranty)",
+			'page_header' 		=> Companies::where('id',$id)->first()->company_name,
+			'company' 			=> Companies::where('id',$id)->first(),
+			'user'				=> Confide::user(),
+			'expense' 			=> Expenses::where('company_id',$id)->get(),
+			'technician_count' 	=> Expenses::where('company_id',$id)->count()
 		);
-		return View::make('operations.sales.services.expense_technician',$datatopass);
+		return View::make('operations.sales.services.expense.expense_technician',$datatopass);
 	}
 
 	public function add_expense_technician_view($id)
@@ -1555,7 +1555,7 @@ class SalesController extends Controller {
 			'user'			=> Confide::user(),
 			'products'		=> Products::where('company_id',$id)->get()
 		);
-		return View::make('operations.sales.services.add_technician_allowance_view',$datatopass);
+		return View::make('operations.sales.services.expense.add_expense_technician_view',$datatopass);
 	}
 
 	public function add_expense_technician($id){
@@ -1609,7 +1609,7 @@ class SalesController extends Controller {
 				$add_expense_technician->save();
 
 				$datatopass = array(
-					'message' => "Your Data MOTO Has Been Successfully Saved!",
+					'message' => "Your Data Has Been Successfully Saved!",
 				);
 
 				return Redirect::to(URL::previous())->with('add_technician_expense_success',$datatopass);
@@ -1619,6 +1619,36 @@ class SalesController extends Controller {
 				return Redirect::to(URL::previous())->with('add_technician_expense_error',$validator->messages());
 			}
 	}
+
+	public function delete_expense_technician($id,$expense_id)
+	{
+
+		$validator = Validator::make(
+		    array(
+		        'expense_id' => $expense_id,
+		    ),
+		    array(
+		        'expense_id' => 'required',
+		    )
+		);
+
+		if($validator->passes())
+		{
+			$delete_expense_technician 	= Expenses::find($expense_id);
+			$prev   			= $delete_expense_technician->$id;
+			$delete_expense_technician->delete();
+			$datatopass = array(
+				'message' => "Record has been successfully deleted!",
+			);
+			return Redirect::to(URL::previous())->with('delete_expense_technician_success',$datatopass);
+		}
+
+		if($validator->fails())
+		{
+			return Redirect::to(URL::previous())->with('delete_expense_technician_error',$validator->messages());
+		}	
+	}
+
 
 	public function invoice($id)
 	{
@@ -1664,6 +1694,18 @@ class SalesController extends Controller {
 			'user'			=> Confide::user(),
 		);
 		return View::make('operations.sales.invoice.provisional_receipt',$datatopass);
+	}
+
+	public function delivery_receipt($id)
+	{
+		$datatopass  = array(
+			'title' 		=> "Delivery Receipt- Beezmode",
+			'page_label'	=> "",
+			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
+			'company' 		=> Companies::where('id',$id)->first(),
+			'user'			=> Confide::user(),
+		);
+		return View::make('operations.sales.invoice.delivery_receipt',$datatopass);
 	}
 
 

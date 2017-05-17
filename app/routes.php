@@ -129,14 +129,17 @@ Route::get('sales/{id}/add_expense_service_view/{order_id}/{service_id}', array(
 Route::post('sales/{id}/add_expense_service/{order_id}', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_service'));
 Route::get('sales/{id}/update_expense_service_view/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_expense_service_view'));
 Route::post('sales/{id}/update_expense_service/{service_id}', array('before' => 'auth|view_service', 'uses' =>'SalesController@update_expense_service'));
+
+Route::get('sales/{id}/expense_technician', array('before' => 'auth|view_service', 'uses' =>'SalesController@expense_technician'));
 Route::get('sales/{id}/add_expense_technician_view', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician_view'));
 Route::post('sales/{id}/add_expense_technician', array('before' => 'auth|add_service', 'uses' =>'SalesController@add_expense_technician'));
-Route::get('sales/{id}/expense_technician', array('before' => 'auth|view_service', 'uses' =>'SalesController@expense_technician'));
+Route::get('sales/{id}/delete_expense_technician/{expense_id}', array('before' => 'auth|delete_service', 'uses' =>'SalesController@delete_expense_technician'));
 
 Route::get('sales/{id}/invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@invoice'));
 Route::get('sales/{id}/cash_invoice', array('before' => 'auth|view_service', 'uses' =>'SalesController@cash_invoice'));
 Route::get('sales/{id}/official_receipt', array('before' => 'auth|view_service', 'uses' =>'SalesController@official_receipt'));
 Route::get('sales/{id}/provisional_receipt', array('before' => 'auth|view_service', 'uses' =>'SalesController@provisional_receipt'));
+Route::get('sales/{id}/delivery_receipt', array('before' => 'auth|view_service', 'uses' =>'SalesController@delivery_receipt'));
 
 // Route::get('sales/{id}/service_list_price', array('before' => 'auth', 'uses' =>'SalesController@service_list_price'));
 Route::get('sales/{id}/delivery_list', array('before' => 'auth|view_delivery', 'uses' =>'SalesController@delivery_list'));

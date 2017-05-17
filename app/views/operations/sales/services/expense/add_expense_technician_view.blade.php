@@ -1,18 +1,21 @@
 @extends('layout.in_app')
 @section('content')
-                            @if(isset(Session::get('add_technician_success')["message"]))
-                                    <div class="alert alert-success">
-                                        {{Session::get('add_technician_success')["message"]}}
-                                    </div>
-                                @endif
-                                @if(Session::get('add_technician_error'))
-                                    <div class="alert alert-error alert-danger">
-                                    @foreach(Session::get('add_technician_error')->all() as $m)
-                                        {{$m}}<br>    
-                                    @endforeach
-                                    </div>
-                            @endif
-                        <div class="block block-bordered">
+
+                   
+                @if(isset(Session::get('add_technician_expense_success')["message"]))
+                        <div class="alert alert-success">
+                            {{Session::get('add_technician_expense_success')["message"]}}
+                        </div>
+                    @endif
+                    @if(Session::get('add_technician_expense_error'))
+                        <div class="alert alert-error alert-danger">
+                        @foreach(Session::get('add_technician_expense_error')->all() as $m)
+                            {{$m}}<br>    
+                        @endforeach
+                        </div>
+                @endif
+
+                <div class="block block-bordered">
                         <div class="block-header bg-gray-lighter">
                             <ul class="block-options">
                                 <li>
@@ -21,7 +24,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h3 class="block-title">Add Technician Allowance</h3>
+                            <h3 class="block-title">Add Technician Allowance aa</h3>
                         </div>
                         <div class="block-content">
                             <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_expense_technician')}}" method="post">

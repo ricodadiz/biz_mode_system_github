@@ -31,12 +31,12 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">Top Sellers</div>
                             </a>
                         </div> --}}
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-offset-3">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$services_count}}"></div>
+                                    <div class="h1 font-w700 text-info" data-toggle="countTo" data-to="{{$services_count}}"></div>
                                 </div>
-                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Services</div>
+                                <div class="block-content block-content-full block-content-mini bg-gray-lighter text-info font-w600">All Services</div>
                             </a>
                         </div>
                     </div>

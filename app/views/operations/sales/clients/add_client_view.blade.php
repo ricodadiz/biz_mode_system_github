@@ -1,7 +1,7 @@
 @extends('layout.in_app')
 @section('content')
 
-		<main id="main-container" style="min-height: 751px;">
+	
                 <!-- Page Content -->
                 <div class="content content-boxed">
                     <!-- Header Tiles -->
@@ -28,7 +28,7 @@
                     <!-- Info -->
                     <div class="block">
                         <div class="block-header bg-gray-lighter">
-                            <h3 class="block-title">Info</h3>
+                            <h3 class="block-title">Add Client Info</h3>
                         </div>
                     @if(Session::get('add_error'))
                         <div class="alert alert-error alert-danger">
@@ -117,7 +117,7 @@
                     <!-- END Images -->
                 </div>
                 <!-- END Page Content -->
-            </main>
+         
 
             <script type="text/javascript">
                 // uiHelperCkeditor();

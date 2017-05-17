@@ -21,7 +21,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h3 class="block-title">Add Technician Allowance </h3>
+                            <h3 class="block-title">Add Technician Allowance</h3>
                         </div>
                         <div class="block-content">
                             <form class="form-horizontal push-10-t push-10" action="{{URL::to('sales/'.$company->id.'/add_technician')}}" method="post">

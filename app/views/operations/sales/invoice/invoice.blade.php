@@ -26,6 +26,14 @@
                     <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Create Provisional Receipt</div>
                 </a>
             </div>
+            <div class="col-sm-6 col-md-3">
+                <a class="block block-link-hover3 text-center" href="{{URL::to('sales/'.$company->id.'/delivery_receipt')}}">
+                    <div class="block-content block-content-full">
+                        <div class="h1 font-w700 text-success"><i class="fa fa-plus"></i></div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-gray-lighter text-success font-w600">Create Delivery Receipt</div>
+                </a>
+            </div>
         </div>
 
 @stop
