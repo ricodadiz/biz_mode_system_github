@@ -847,7 +847,7 @@ class SalesController extends Controller {
 			'user'			=> Confide::user(),
 			'services' 		=> Service::where('company_id',$id)->get(),
 			'services_count' => Service::where('company_id',$id)->count(),
-			'services_total' => Service::where('company_id',$id)->sum('total'),
+			// 'services_total' => Service::where('company_id',$id)->sum('total'),
 		);
 		return View::make('operations.sales.services.service_list',$datatopass);
 	}
