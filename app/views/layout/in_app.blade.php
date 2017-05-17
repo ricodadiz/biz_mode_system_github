@@ -464,8 +464,7 @@
                                                     <a href="{{URL::to('sales/'.$company->id.'/order_list_generic')}}">Order List</a>
                                                     @endif
                                                 </li>
-                                            </ul>
-                                
+                                            </ul>     
                                         </li>
 <!--                                         <li>
                                             <a class="nav-submenu" data-toggle="nav-submenu" href="#">Documents</a>
@@ -486,13 +485,26 @@
                                         </li>
  -->
                                         <li>
+                                            @if($user->can('view_delivery'))
+                                            <a class="nav-submenu" data-toggle="nav-submenu">Product Delivery</a> 
+                                            <ul>
+                                            @endif
+                                                @if($user->can('view_delivery'))
+                                                <li>
+                                                    <a href="{{URL::to('sales/'.$company->id.'/delivery_list')}}">Delivery List</a>
+                                                </li>
+                                                @endif
+                                            </ul>
+                                        </li>
+                                         
+                                        <li>
                                             @if($user->can('view_service'))
                                             <a class="nav-submenu" data-toggle="nav-submenu">Service Order</a> 
                                             @endif
                                             <ul>
                                                 @if($user->can('view_service'))
                                                 <li>
-                                                    <a class="nav-submenu" data-toggle="nav-submenu" >Services</a>
+                                                    <a class="nav-submenu" data-toggle="nav-submenu">Services</a>
                                                    <ul>
                                                     @endif
                                                         @if($user->can('view_service'))
@@ -524,11 +536,7 @@
                                                         @endif
                                                     </ul> 
                                                 </li>
-                                                @if($user->can('view_delivery'))
-                                                <li>
-                                                    <a href="{{URL::to('sales/'.$company->id.'/delivery_list')}}">Delivery List</a>
-                                                </li>
-                                                @endif
+                                               
                                             </ul>
                                         </li>
                                          <li>

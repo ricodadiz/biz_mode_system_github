@@ -140,7 +140,7 @@
                                             <td></td>
                                             <td></td>
                                             <td class="text-right"> <strong >Total:</strong></td>
-                                            <td class="text-center">{{$services_total}}</td>
+                                            <td class="text-center"></td>
                                             <td>
                                               
                                             </td>

@@ -12,7 +12,7 @@
                             </a>
                         @endif
                         </div>
-                        <div class="col-sm-6 col-md-3">
+{{--                         <div class="col-sm-6 col-md-3">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
                                     <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
@@ -20,11 +20,11 @@
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">For Delivery</div>
                             </a>
                         </div>
-
+ --}}
                         <div class="col-sm-6 col-md-3">
                             <a class="block block-link-hover3 text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="h1 font-w700" data-toggle="countTo" data-to=""></div>
+                                    <div class="h1 font-w700" data-toggle="countTo" data-to="{{$deliveries_count}}"></div>
                                 </div>
                                 <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">All Deliveries</div>
                             </a>
@@ -79,17 +79,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                  @foreach($deliveries as $d)
                                     <tr>
                                         <td class="text-center">
                                              <a data-toggle="modal" data-target="#modal-popout2-" title="View Information">
-                                                <strong></strong>
+                                                <strong>{{$d->delivery_code}}</strong>
                                              </a>
                                         </td>
                                         <td class="visible-lg">
-                                            <p></p>
+                                            <p>{{$d->delivered_to}}</p>
                                         </td>
-                                        <td class="hidden-xs text-center"></td>
+                                        <td class="hidden-xs text-center">{{$d->created_at}}</td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
                                                 @if($user->can('view_delivery'))
@@ -101,7 +101,7 @@
                                             </div>
                                         </td>
                                     </tr>
-
+                                    @endforeach
                                     <div class="modal fade" id="modal-popout-" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout">
                                             <div class="modal-content">

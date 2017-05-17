@@ -679,10 +679,11 @@ class SalesController extends Controller {
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
-			// 'deliveries'	=> Delivery::where('company_id',$id)->get(),
-			// 'deliveries_count' => Delivery::where('company_id',$id)->count(),
+			'deliveries'	=> Delivery::where('company_id',$id)->get(),
+			'deliveries_count' => Delivery::where('company_id',$id)->count(),
 			'clients'        => Clients::where('company_id',$id)->first(),
 			'products'		=> Products::where('company_id',$id)->get(),
+
 			// 'delivery_count' => OrdersGeneric::where('delivery_status','YES')->count(),
 
 		);
@@ -720,7 +721,6 @@ class SalesController extends Controller {
 			'clients'       => Clients::where('company_id',$id)->get(),
 			'products'		=> Products::where('company_id',$id)->get(),
 			'order'			=> OrdersGeneric::where('company_id',$id)->get(),
-			'orders'		=> OrdersGeneric::where('company_id',$id)->get(),
 			'units'			=> Units::where('company_id',$id)->get(),
 			'product_in_orders'	=> OrdersProduct::where('order_id',$id)->get(),
 			'clients'		=> Clients::where('company_id',$id)->get(),
@@ -767,10 +767,6 @@ class SalesController extends Controller {
 			$new_delivery->company_id 		= $id;
 			$new_delivery->delivered_to 	= $delivered_to;
 			$new_delivery->delivery_date 	= $delivery_date;
-			//$new_delivery->product_name 	= $delivery_product;
-			//$new_delivery->quantity 		= $delivery_quantity;
-			//$new_delivery->unit 			= $delivery_unit;
-			//$new_delivery->description 		= $delivery_description;
 			$new_delivery->delivery_code	= uniqid();
 			$new_delivery->save();
 
@@ -784,10 +780,10 @@ class SalesController extends Controller {
 				$product_delivery->unit 	= $delivery_unit[$x];
 				$product_delivery->save();
 
-				// $reduce_quantity = Products::find($dp);
-				// $reduce_quantity->in_stock -= $delivery_quantity[$x];
-				// $reduce_quantity->save();
-				// $x++;
+				$reduce_quantity = Products::find($dp);
+				$reduce_quantity->in_stock -= $delivery_quantity[$x];
+				$reduce_quantity->save();
+				$x++;
 			}
 
 			$datatopass = array(
@@ -847,7 +843,7 @@ class SalesController extends Controller {
 			'user'			=> Confide::user(),
 			'services' 		=> Service::where('company_id',$id)->get(),
 			'services_count' => Service::where('company_id',$id)->count(),
-			'services_total' => Service::where('company_id',$id)->sum('total'),
+			// 'services_total' => Service::where('company_id',$id)->sum('total'),
 		);
 		return View::make('operations.sales.services.service_list',$datatopass);
 	}

@@ -243,11 +243,20 @@
         {
             var rowidx = $(btn_obj).closest('.row-line').index() - 1;
 
+            $(btn_obj).prop('disabled', true);
+
             // console.log($(btn_obj).closest('.row-line').index());
 
             // console.log(rowidx);
 
-            $('div.row-line:eq('+rowidx+')').remove();
+            // $('div.row-line:eq('+rowidx+')').remove();
+            $('div.row-line:eq('+rowidx+')').animate({
+                        opacity: "hide",
+                        width: "0",
+                        height: "0"
+                    }, 600, function(){
+                        $(this).remove();
+                    });
 
             // console.log(rowidx);
         }
@@ -300,7 +309,7 @@
             id++;
         });*/
         $('.newline').click(function(){
-            var newline =  '<div class="row-line">' +
+            var html =  '<div class="row-line">' +
                                 '<div class="form-group">' +
                                     '<div class="col-xs-2">' +
                                         '<div class="form-material">' +
@@ -371,14 +380,18 @@
                                 '</div>' +
                             '</div>'
                             ;
-            $(".product_rows").append(newline);
+
+            // Add Animation Option 1
+            // $(html).hide().appendTo(".product_rows").fadeIn(300);
+
+            // Add Animation Option 2
+            $(html).hide().appendTo('.product_rows').slideDown(300);
+
+            // No Add Animation
+            // $(".product_rows").append(html);
             // id++;
         });
-        // $('.delrow').click(function(){
-        //     var rowidx = $(this).closest('product_rows').rowIndex;
-
-        //     console.log(rowidx);
-        // });
+        
         $('#formid').submit(function(e){
             if (submit !=0)
             {
