@@ -19,6 +19,7 @@ class CreateServiceClientTable extends Migration {
             $table->string('item');
             $table->string('unit_cost');
             $table->string('qty');
+            $table->string('total');
             $table->softDeletes();
             $table->timestamps();
           });

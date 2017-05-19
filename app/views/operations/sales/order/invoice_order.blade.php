@@ -152,7 +152,7 @@
                                     <div class="col-md-4 text-right">Cashier/Authorized Representative</div>
                                 </div>
                             </div>
-                            <p class="text-muted text-center"><small>"THIS INVOICE SHALL BE VALIK FOR (5)YEARS FROM THE DATE OF ATP."</small></p>
+                            <p class="text-muted text-center"><small>"THIS INVOICE SHALL BE VALID FOR (5)YEARS FROM THE DATE OF ATP."</small></p>
                             <!-- END Footer -->
                         </div>
                     </div>

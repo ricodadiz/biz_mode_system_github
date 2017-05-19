@@ -29,10 +29,10 @@
                             <div class="h5 text-center"><strong>JOYVILYN B. BASA</strong> -Prop</div>
                             <div class="h5 text-center push-30">Vat Reg. TIN 907-378-697-000</div>
                            
-                            <div class="h5 text-right"><strong>NO.</strong></div>
+                            <div class="h5 text-right"><strong>NO. </strong></div>
                          
                             <div class="h3 text-center "><strong>Delivery Receipt</strong></div>
-                            <hr class="hidden-print">
+                            {{-- <hr class="hidden-print"> --}}
                             <div class="row items-push-2x">
                                 <!-- Company Info -->
                             <p class="h4 font-w400 push-5"></p>
@@ -40,17 +40,17 @@
                             <div class="block-content">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="text-left"><b>Delivery to:</b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 220px;"></div>
+                                        <div class="text-left"><b>Delivery to: </b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 220px;" value=" {{$client->client_customer_name}}"></div>
                                     </div>
                                     <div class="col-xs-6">
                                         
-                                            <div class="text-left"><b>Date:</b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 250px;"></div>
+                                            <div class="text-left"><b>Date:</b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 250px;" value=" {{$date}}"></div>
                                       
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="text-left"><b>Address:</b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 240px;"></div>
+                                        <div class="text-left"><b>Address:</b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 240px;" value=" {{$client->client_shipping_address}}"></div>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="text-left"><b>Terms: </b><input type="text" style="border-top: none;border-left: none;border-right: none;width: 235px;"></div>
@@ -81,59 +81,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     
+                                     @foreach($delivery_product as $dp)
                                         <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center" style="padding: 18px;">{{$dp->quantity}}</td>
+                                            <td class="text-center">{{$dp->unit}}</td>
+                                            <td class="text-center">{{$products->product_name}}</td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="padding: 18px;"></td>
-                                            <td class="text-center"></td>
-                                            <td class="text-center"></td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <!-- END Table -->
 
                             <!-- Footer -->
-                            <hr class="hidden-print">
+                            {{-- <hr class="hidden-print"> --}}
                             <div class="block">
                                 <div class="row">
                                     <div class="col-md-8"></div>

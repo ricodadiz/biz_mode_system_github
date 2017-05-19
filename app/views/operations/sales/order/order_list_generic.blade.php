@@ -67,7 +67,12 @@
                                             <div class="btn-group">
                                                <!--  <a href="{{URL::to('sales/'.$company->id.'/order_update_generic_view/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Edit Order"><i class="fa fa-pencil text-primary"></i></a> -->
                                                
-                                                <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Sales Invoice"><i class="fa fa-info-circle text-info"></i></a>
+                                                <a href="{{URL::to('sales/'.$company->id.'/invoice_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Sales Invoice"><i class="si si-printer text-info"></i></a>
+
+                                                <a href="{{URL::to('sales/'.$company->id.'/official_receipt/')}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Official Receipt"><i class="si si-printer text-success"></i></a>
+
+                                                <a href="{{URL::to('sales/'.$company->id.'/provisional_receipt/')}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Provisional Receipt"><i class="si si-printer text-warning"></i></a>
+
                                                 <a href="{{URL::to('sales/'.$company->id.'/view_order/'.$og->id)}}" class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="View Order Info"><i class="fa fa-eye text-info"></i></a>
                                                 <a data-toggle="modal" data-target="#modal-popout-{{$og->id}}" class="btn btn-xs btn-default" type="button" title="Remove Order"><i class="fa fa-times text-danger"></i></a>
                                             </div>

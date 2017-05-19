@@ -138,13 +138,13 @@
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-firstname">Quantity</label>
-                                                <input class="form-control input-lg" type="text" name="qty[]" id="qty-0"  placeholder="Enter Quantity" onkeypress="total_amount(0)">
+                                                <input class="form-control input-lg" type="text" name="qty[]" id="qty-0"  placeholder="Enter Quantity">
                                               </div>
                                             </div>
                                             <div class="col-xs-6">
                                               <div class="form-material">
                                                 <label for="mega-lastname">Amount</label>
-                                                <input class="form-control input-lg" type="text" name="total[]" id="total-0">
+                                                <input class="form-control input-lg input value1" type="number" name="total[]" id="total-0">
                                               </div>
                                             </div>
                                         </div>
@@ -153,7 +153,14 @@
                                     <div class="col-xs-2">
                                         <div class="form-material">
                                             <label for="mega-lastname">Service Charge</label>
-                                            <input class="form-control input-lg" type="text" id="service_charge" name="service_charge">
+                                            <input class="form-control input-lg input value2" type="number" id="service_charge" name="service_charge" onkeyup="total_amount()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <div class="form-material">
+                                            <label for="mega-lastname">Total</label>
+                                            <input class="form-control input-lg" type="text" id="total-amount" name="total-amount[]" placeholder="0">
                                         </div>
                                     </div>
                                 </div>
@@ -227,23 +234,29 @@
              });
         };
 
-        // var total_amount = function(id)
-        //     {
-        //         $(this).change(function(event) {
-        //             totalAmount = 0;
+        var total_amount = function(id){
+                    var val1 = +$(".value1").val();
+                    var val2 = +$(".value2").val();
+                    var total = val1+val2;
+                    $("#total-amount").val(total);
+                    console.log(val2);
+        
+        };
 
-        //             $('#qty-'+id).each(function() {
-        //                  // unitTotal = parseInt($('#unit_cost-'+id).val());
-        //                  unitTotal= ($(this).val() * $('#unit-cost-'+id).val());
-        //                  $('#total-'+id).val(unitTotal);
-        //             });
-        //             $.each($('input[name^="total"]'), function() {
-        //                 totalAmount += parseInt($(this).val());
-        //             });
-        //                 $('#total-amount').val(totalAmount);
-        //         });
-        //     }
+    
     </script>
+
+   {{--  <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $(".input").keypress(function(){
+            var val1 = +$(".value1").val();
+            var val2 = +$(".value2").val();
+            $("#total-amount").val(val1+val2);
+
+            });
+        });
+    </script> --}}
 
     <script type="text/javascript">
                 // uiHelperCkeditor();

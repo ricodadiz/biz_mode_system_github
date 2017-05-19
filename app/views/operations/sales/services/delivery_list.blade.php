@@ -93,7 +93,7 @@
                                         <td class="text-center">
                                             <div class="btn-group btn-group-xs">
                                                 @if($user->can('view_delivery'))
-                                                 <a href="" title="Delivery Invoice" class="btn btn-default"><i class="si si-printer"></i></a>
+                                                 <a href="{{URL::to('sales/'.$company->id.'/delivery_receipt/'.$d->id)}}" title="Delivery Invoice" class="btn btn-default"><i class="si si-printer"></i></a>
                                                 @endif
                                                 @if($user->can('delete_delivery'))
                                                  <a data-toggle="modal" data-target="#modal-popout-" title="Delete" class="btn btn-default"><i class="fa fa-times text-danger"></i></a>

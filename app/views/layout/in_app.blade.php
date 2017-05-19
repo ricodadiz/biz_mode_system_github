@@ -499,7 +499,7 @@
                                          
                                         <li>
                                             @if($user->can('view_service'))
-                                            <a class="nav-submenu" data-toggle="nav-submenu">Service Order</a> 
+                                            <a class="nav-submenu" data-toggle="nav-submenu">Product Service</a> 
                                             @endif
                                             <ul>
                                                 @if($user->can('view_service'))

@@ -1166,6 +1166,7 @@ class SalesController extends Controller {
 				$service_client_list->item			=OrdersProduct::find($item[$i])->products;
 				$service_client_list->unit_cost		=$unit_cost[$i];
 				$service_client_list->qty			=$qty[$i];
+				$service_client_list->total 		=$total[$i];
 				$service_client_list->save();
 
 				$reduce_quantity = Products::find($it);
@@ -1692,14 +1693,23 @@ class SalesController extends Controller {
 		return View::make('operations.sales.invoice.provisional_receipt',$datatopass);
 	}
 
-	public function delivery_receipt($id)
+	public function delivery_receipt($id,$delivery_id)
 	{
+		$name 		= Delivery::where('id',$delivery_id)->first()->delivered_to;
+		$product 	= ProductDeliveries::where('delivery_id',$delivery_id)->first()->product_id;
+
 		$datatopass  = array(
 			'title' 		=> "Delivery Receipt- Beezmode",
 			'page_label'	=> "",
 			'page_header' 	=> Companies::where('id',$id)->first()->company_name,
 			'company' 		=> Companies::where('id',$id)->first(),
 			'user'			=> Confide::user(),
+			'delivery'		=> Delivery::where('id',$delivery_id)->get(),
+			'date'	=> Delivery::where('id',$delivery_id)->first()->delivery_date,
+			'delivery_product' => ProductDeliveries::where('delivery_id',$delivery_id)->get(),
+			'client'		=> Clients::where('client_customer_name',$name)->first(),
+			'products'		=> Products::where('id',$product)->first(),
+
 		);
 		return View::make('operations.sales.invoice.delivery_receipt',$datatopass);
 	}
