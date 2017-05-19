@@ -59,12 +59,13 @@
                                         <tr>
                                             <td><strong>{{$op->products}}</strong></td>
                                         <?php 
+                                              date_default_timezone_set('Asia/Manila');
                                               $date = new DateTime(); 
                                               $result = $date->format('Y-m-d');
                                         ?> 
                                         @if($op->order_product_warranty_date == $result)   
                                             <td><strong class="label label-danger">Out of Warranty</strong></td>
-                                        @else
+                                        @elseif ($op->order_product_warranty_date) 
                                             <td><strong class="label label-success">Under Warranty</strong></td>
                                         @endif
                                             @if($op->order_product_warranty_date == $result)

@@ -121,14 +121,14 @@
                                                         <h3 class="block-title">Confirm Delete Service</h3>
                                                     </div>
                                                     <div class="block-content">
-                                                        Do you want to proceed?
+                                                        Do you want to delet this service?
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a href="{{URL::to('sales/{id}/delete_service_list/'.$s->id)}}">
-                                                    <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-check"></i> Ok</button>
+                                                    <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-check"></i> Yes</button>
                                                     </a>
-                                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
+                                                    <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">No</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,8 +139,8 @@
                                         <tr class="info">
                                             <td></td>
                                             <td></td>
-                                            <td class="text-right"> <strong >Total:</strong></td>
-                                            <td class="text-center"></td>
+                                            <td class="text-right"> <strong >Total: </strong></td>
+                                            <td class="text-center">{{$services_total_amount}}</td>
                                             <td>
                                               
                                             </td>

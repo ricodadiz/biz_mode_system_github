@@ -24,6 +24,7 @@ class CreateServiceList extends Migration {
             $table->string('work_details');
             $table->string('remarks_result');
             $table->string('service_charge');
+           	$table->string('total');
             $table->softDeletes();
             $table->timestamps();
         });	

@@ -160,7 +160,7 @@
                                     <div class="col-xs-2">
                                         <div class="form-material">
                                             <label for="mega-lastname">Total</label>
-                                            <input class="form-control input-lg" type="text" id="total-amount" name="total-amount[]" placeholder="0">
+                                            <input class="form-control input-lg" type="text" id="total-amount" name="total-amount" placeholder="0">
                                         </div>
                                     </div>
                                 </div>

@@ -843,7 +843,7 @@ class SalesController extends Controller {
 			'user'			=> Confide::user(),
 			'services' 		=> Service::where('company_id',$id)->get(),
 			'services_count' => Service::where('company_id',$id)->count(),
-			// 'services_total' => Service::where('company_id',$id)->sum('total'),
+			'services_total_amount'=>Service::where('company_id',$id)->sum('total'),
 		);
 		return View::make('operations.sales.services.service_list',$datatopass);
 	}
@@ -1118,7 +1118,7 @@ class SalesController extends Controller {
 			$unit_cost 		 	 = Input::get("unit-cost");
 			$qty 		 		 = Input::get("qty");
 			$service_charge 	 = Input::get("service_charge");
-			$total 	 			 = Input::get("total");
+			$total 	 			 = Input::get("total-amount");
 
 			$validator = Validator::make(
 			    array(
@@ -1156,7 +1156,7 @@ class SalesController extends Controller {
 				$add_service_list->work_details		=$work_details;
 				$add_service_list->remarks_result	=$remarks_result;
 				$add_service_list->service_charge	=$service_charge;
-
+				$add_service_list->total			=$total;
 				$add_service_list->save();
 
 			 	$i=0;
@@ -1166,7 +1166,6 @@ class SalesController extends Controller {
 				$service_client_list->item			=OrdersProduct::find($item[$i])->products;
 				$service_client_list->unit_cost		=$unit_cost[$i];
 				$service_client_list->qty			=$qty[$i];
-				$service_client_list->total 		=$total[$i];
 				$service_client_list->save();
 
 				$reduce_quantity = Products::find($it);
