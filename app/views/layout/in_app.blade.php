@@ -549,7 +549,7 @@
 {{-- START OF ACCOUNTING MENU--}}
                                 @if($user->can('view_accounting'))
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-balance-scale"></i><span class="sidebar-mini-hide">Accounting</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu"><i class="fa fa-balance-scale"></i><span class="sidebar-mini-hide">Accounting</span></a>
                                 @endif
                                     <ul>
                                         @if($user->can('view_transaction_list'))
@@ -577,7 +577,7 @@
 
                                 @if($user->can('view_purchase'))
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-shopping-cart"></i><span class="sidebar-mini-hide">Purchases</span></a> 
+                                    <a class="nav-submenu" data-toggle="nav-submenu"><i class="fa fa-shopping-cart"></i><span class="sidebar-mini-hide">Purchases</span></a> 
                                     @endif
                                     <ul>
                                     @if($user->can('view_bill'))
@@ -597,6 +597,10 @@
                                     @endif                                   
                                     </ul>
                                 </li> <!-- End of Purchases -->
+
+                                <li>
+                                    <a href="{{URL::to('reports/'.$company->id.'/reports_view')}}"><i class="fa fa-file"></i><span class="sidebar-mini-hide">Reports</span></a> 
+                                </li>
 
                                 @if($user->can('view_roles')  || $user->hasRole('Owner'))
                                 <li class="nav-main-heading"><span class="sidebar-mini-hide">Administration</span></li>
@@ -782,14 +786,7 @@
                             <i class="fa fa-search"></i>
                         </button>
                     </li>
-                    <li class="js-header-search header-search">
-                        <form class="form-horizontal" action="base_pages_search.html" method="post">
-                            <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-                                <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">
-                                <span class="input-group-addon"><i class="si si-magnifier"></i></span>
-                            </div>
-                        </form>
-                    </li>
+                    
                 </ul>
                 <!-- END Header Navigation Left -->
             </header>

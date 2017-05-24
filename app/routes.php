@@ -151,6 +151,12 @@ Route::get('sales/{id}/delete_delivery/{delivery_id}', array('before' => 'auth|d
 Route::post('sales/{id}/get_quantity', array('before' => 'auth|view_delivery', 'uses' =>'SalesController@get_quantity'));
 //Route::get('sales/{id}/reports_services', array('before' => 'auth', 'uses' =>'SalesController@reports_services'));
 
+//====REPORTS=====
+Route::get('reports/{id}/reports_view', array('before' => 'auth|view_service', 'uses' =>'ReportsController@reports_view'));
+Route::get('reports/{id}/sales_report', array('before' => 'auth|view_service', 'uses' =>'ReportsController@sales_report'));
+Route::get('reports/{id}/service_report', array('before' => 'auth|view_service', 'uses' =>'ReportsController@service_report'));
+
+
 //===== OPERATIONS - SALES =====
 Route::get('warehouse/{id}/warehouse_summary', array('before' => 'auth', 'uses' =>'WarehouseController@warehouse_summary'));
 Route::get('warehouse/{id}/manage_warehouse', array('before' => 'auth|view_warehouse', 'uses' =>'WarehouseController@manage_warehouse'));
